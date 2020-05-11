@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+	padding: 0;
+	/* border: 1px solid red; */
+	color: #fffddb;
+}
+
+body {
+	background-color: #01223b;
+	overflow: hidden;
+}
+
+a.customized {
+  font-size: 1.5em;
+  text-decoration: underline;
+  color: #fffddb;
+  margin-right: 10px;
+}
+
+a.customized:hover, a:hover {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+div.lhs {
+	border-right: 2px solid gray;
+}
+
+img.profile-photo {
+  width: 300px;
+	height: 300px;
+	border-radius: 200px;
+	border: 5px solid #fffddb;
+	margin: 0 auto;
+	display: block;
+}
+
+div#biography {
+	text-align: center;
+	color: #fffddb;
+	font-size: 2.5em;
+	line-height: 1em;
+}
+
+p.name {
+	font-weight: 600;
+	font-size: 1.3em;
+}
+
+p.bio {
+	font-size: 0.5em;
+	line-height: 2em;
+}
+
+code.hello-world {
+	color: white;
+	border-radius: 5px;
+	background-color: #28282b;
+	font-size: 0.5em;
+}
+
+p.headers {
+	font-size: 2.3em;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+div#project-wolverine {
+	font-size: 0.8em;
+}
+
+img.project-image-wolverine {
+	width: 350px;
+	overflow: auto;
+	border: 4px solid #fffddb;	
+}
+
+p.project-title {
+	font-size: 2.1em;
+	font-weight: 600;
+}
+
+div.scroll {
+	overflow-y: scroll;
+	max-height: 85vh;
+	overflow-x: hidden;
+	/* padding-bottom: 65px; */
+}
+
+.scroll::-webkit-scrollbar {
+	width: 6px;
+	padding-left: 10px;
+}
+  
+.scroll::-webkit-scrollbar-thumb {
+	border-radius: 20px; 
+}
+  
+.scroll:hover::-webkit-scrollbar-thumb {
+	background-color: #fffddb; 
+	border-radius: 20px; 
+}
+
+p.desc, .hidden-description {
+	font-size: 1.15em;
+}
+
+div#hidden-content {
+	transition: height .5s;
+	height: 0;
+	overflow: hidden;
+}
+
+.hidden-description {
+	padding: 10px;
+}
+
+.row {
+	position: relative;
+}
+
+i.absolute-icon {
+	font-size: 2.5em;
+	position: absolute;
+	bottom: 2em;
+	right: 1.2em;
+}
+
+i.absolute-icon:hover {
+	cursor: pointer;
+}
+
+span.link {
+	position: absolute;
+	bottom: 0.5em;
+	right: 3em;
+}
+
+img.image-descriptions {
+	width: 30%;
+	border: 2px solid #fffddb;	
+	margin-right: 15px;
+}
+
+.d3-images {
+	width: 45%;
+	border: 4px solid #fffddb;	
+	margin-right: 45px;
+}
