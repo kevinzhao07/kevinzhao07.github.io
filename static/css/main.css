@@ -1,5 +1,5 @@
 * {
-  margin: 0;
+  	margin: 0;
 	padding: 0;
 	/* border: 1px solid red; */
 	color: #fffddb;
@@ -138,11 +138,9 @@ span.link {
 img.image-descriptions {
 	width: 30%;
 	border: 2px solid #fffddb;	
-	margin-right: 15px;
 }
 
 .d3-images {
 	width: 45%;
 	border: 4px solid #fffddb;	
-	margin-right: 45px;
 }
