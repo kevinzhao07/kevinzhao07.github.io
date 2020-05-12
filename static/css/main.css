@@ -144,3 +144,8 @@ img.image-descriptions {
 	width: 45%;
 	border: 4px solid #fffddb;	
 }
+
+.pdf {
+	height: 67vh;
+	width: 25vw;
+}

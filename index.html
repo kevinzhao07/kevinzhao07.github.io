@@ -38,7 +38,7 @@
                 <a class="nav-link customized mr-3" href="https://www.linkedin.com/in/kevinmichaelzhao/">linkedin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link customized mr-3" href="#">resume</a>
+                <a class="nav-link customized mr-3" href="#resume">resume</a>
               </li>
             </ul>
           </nav>
@@ -72,6 +72,7 @@
         <div class="col-7 scroll">
           <p class="ml-5 headers mt-0 pt-0"> projects </p>
 
+          <!-- wolverine-dm -->
           <div class="row mb-4 clickable">
             <div class="col-4">
               <img src="static/images/wolverine-dm.jpg" class="project-image-wolverine ml-5"/>
@@ -86,6 +87,7 @@
             <i class="fas fa-chevron-circle-down absolute-icon" onclick="growDiv(this);"></i>  
           </div>
 
+          <!-- wolverine-dm hidden -->
           <div id="hidden-content" class="row mb-3">
             <div class="col-11 ml-5">
               <div class="hidden-description pt-2 pb-2"> 
@@ -99,15 +101,17 @@
                 liking, editing, and deleting posts, commenting and replying to others, and updating profile usernames and photos. It also 
                 supports advanced features such as resetting account password through email and saving uploaded photos to Amazon Web Services.
                 <br/> <p class="mb-3"></p>
+                <p style="border-bottom: 2px solid grey" class='pb-3'>
                 This platform utlizes Django and its rendering template to display QuerySets of posts, messages, etc. Most actions are handled
                 by jQuery and React, allowing the frontend to be changed dynamically without needing unnecessary reloads. <br/>The key takeaways from this
-                included learning Django and templating language, hosting static files on AWS, manipulating data, and updating the frontend on user interactions. 
+                included learning Django and templating language, hosting static files on AWS, manipulating data, and updating the frontend on user interactions. </p>
 
 
               </div>
             </div>
           </div>
 
+          <!-- data visualizer -->
           <div class="row mb-4 clickable mt-4">
             <div class="col-4">
               <img src="static/images/d3-visualizer.jpg" class="project-image-wolverine ml-5"/>
@@ -123,6 +127,7 @@
             <i class="fas fa-chevron-circle-down absolute-icon" onclick="growDiv(this);"></i>  
           </div>
 
+          <!-- data visualizer hidden -->
           <div id="hidden-content" class="row mb-3">
             <div class="col-11 ml-5">
               <div class="hidden-description pt-2 pb-2"> 
@@ -136,12 +141,15 @@
                 <br/> <p class="mb-3"></p>
                 The dashboard utilizes Mapbox, Leaflet, and d3 to visualize and contextualize the collected and aggregated data. Key takeaways from this project were the ability to build upon rudimentary JavaScript, working in a small team, and seeing a project from concepts to execution.
                 <br/> <p class="mb-3"></p>
-                <span style="font-size: 1.3em; font-weight: 600;"> features: </span> user login, auto-complete search, mapbox map with county/city layers, map markers with detailed data population, sortable tables and filterable data visualizations with easy transitions.
+                <p style="border-bottom: 2px solid grey" class='pb-3'>
+                  <span style="font-size: 1.3em; font-weight: 600;"> features: </span> user login, auto-complete search, mapbox map with county/city layers, map markers with detailed data population, sortable tables and filterable data visualizations with easy transitions.
+                </p>
 
               </div>
             </div>
           </div>
 
+          <!-- claws -->
           <div class="row mb-4 clickable mt-4">
             <div class="col-4">
               <img src="static/images/claws.jpg" class="project-image-wolverine ml-5"/>
@@ -150,47 +158,101 @@
             <div class="col-7">
               <p class="project-title ml-5 mb-1"> CLAWS <code style="color:white"><span style="color: #d5a3ff;">Django</span>|<span style="color: #51d651;">JS</span>|<span style="color: #5ec9ff;">Hololens</span></code> </p>
               <p class="ml-5 desc"> created website and database to help with the development of a mixed-reality app for the hololens. developed as part of the <a href="https://microgravityuniversity.jsc.nasa.gov/nasasuits.cfm"> NASA SUITS Challenge!</a> </p>
-                <small style="font-size: 0.9em;"><span class="link">link to project <a href="https://wolverine-dm.herokuapp.com">here</a></span></small>
+                <small style="font-size: 0.9em;"><span class="link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link to project <a href="https://claws-mcc.herokuapp.com">here</a><br/>
+                  user: admin, pass: admin</span></small>
             </div>
 
             <i class="fas fa-chevron-circle-down absolute-icon" onclick="growDiv(this);"></i>  
           </div>
 
+          <!-- claws hidden -->
           <div id="hidden-content" class="row mb-3">
             <div class="col-11 ml-5">
-              <p class="hidden-description pt-2 pb-2"> claws work here:
-              </p>
+              <div class="hidden-description pt-2 pb-2"> 
+
+                <div class="mb-4">
+                  <img src="static/images/claws-1.jpg" class="d3-images mr-5"/><img src="static/images/claws-2.jpg" class="d3-images"/> <br/>
+                </div>
+
+                CLAWS, or Compact Localized Augmented Work Station, is the name of our team that is currently working on developing augmented reality prototypes for astronauts during extravehicular activities. Right now, visual aides for astronauts are massively underperforming their duties, and can result in astronauts facing difficult situations. For our Hololens prototype, we prioritized monitoring health statistics (heartbeat rate, pressure, oxygen levels, etc.) with a self-explanatory graphic user interface, so astronauts can work and take notes and pictures outside the vehicle safely.
+
+                <br/> <p class="mb-3"></p>
+                <p style="border-bottom: 2px solid grey" class='pb-3'>
+                The Hololens portion is currently still in development. The website is a simple dashboard that allows anyone involved in the mission to create notes, add images, and update mission tasks that will then be sent as JSON data to the Hololens. The Hololens can also communicate with the website vice-versa. The site makes use of Django and its databases to store saved information. </p>
+              </div>
             </div>
           </div>
           
           <p class="ml-5 headers mt-0 pt-0"> work experience </p>
           
-          <div class="row mb-5">
+          <!-- artsengine -->
+          <div class="row mb-4 clickable mt-4">
             <div class="col-4">
-              <img src="static/images/wolverine-dm.jpg" class="project-image-wolverine ml-5"/>
+              <img src="static/images/artsengine.jpg" class="project-image-wolverine ml-5"/>
             </div>
 
             <div class="col-7">
-              <p class="project-title ml-5 mb-1"> ArtsEngine (Wordpress Redesign) </p>
-              <p class="ml-5"> work here
-              </p>
+              <p class="project-title ml-5 mb-1"> ArtsEngine <code style="color:white"><span style="color: #3984e6;">Wordpress</span>|<span style="color: #51d651;">JS</span></code> </p>
+              <p class="ml-5 desc"> redesigned and promoted website of university program focusing on bringing engineering and arts students together. </p>
+                <small style="font-size: 0.9em;"><span class="link">link to project <a href="https://claws-mcc.herokuapp.com">here</a></small>
             </div>
 
+            <i class="fas fa-chevron-circle-down absolute-icon" onclick="growDiv(this);"></i>  
           </div>
-          
-          <div class="row mb-5">
+
+          <!-- artsengine hidden -->
+          <div id="hidden-content" class="row mb-3">
+            <div class="col-11 ml-5">
+              <div class="hidden-description pt-2 pb-2"> 
+              </div>
+            </div>
+          </div>
+
+          <!-- content -->
+          <div class="row mb-4 clickable mt-4">
             <div class="col-4">
-              <img src="static/images/wolverine-dm.jpg" class="project-image-wolverine ml-5"/>
+              <img src="static/images/artsengine.jpg" class="project-image-wolverine ml-5"/>
             </div>
 
             <div class="col-7">
-              <p class="project-title ml-5 mb-1"> Crossfilter/Bootstrap/Notes </p>
-              <p class="ml-5">all notes stuff, maybe projecst not work
-              </p>
+              <p class="project-title ml-5 mb-1"> Tutorials <code style="color:white"><span style="color: #e639cf;">Markdown</span></code> </p>
+              <p class="ml-5 desc"> redesigned and promoted website of university program focusing on bringing engineering and arts students together. </p>
+                <small style="font-size: 0.9em;"><span class="link">link to project <a href="https://claws-mcc.herokuapp.com">here</a></small>
+            </div>
+
+            <i class="fas fa-chevron-circle-down absolute-icon" onclick="growDiv(this);"></i>  
+          </div>
+
+          <!-- content hidden -->
+          <div id="hidden-content" class="row mb-3">
+            <div class="col-11 ml-5">
+              <div class="hidden-description pt-2 pb-2"> 
+              </div>
             </div>
           </div>
 
-        </div>
+          <div class="row">
+            <div class="col-4">
+              <p id="#resume" class="ml-5 headers mt-0 pt-0"> resume </p>
+            </div>
+            <div class="col-4 ml-5">
+              <a class="btn btn-secondary mt-3 dlbt" role="button" href="static/images/kevin_zhao_resume.pdf" target="_blank" 
+              download="kevin_zhao_resume" name="download" title="download my resume">Full View</a>
+            </div>
+          </div>
+            
+          <!-- resume -->
+          <div class="row mb-4 clickable mt-4">
+            <div class="col-6">
+              <iframe class="pdf ml-5" title="kevin's resume" src="static/images/kevin_zhao_resume.pdf" name="resume"></iframe>
+            </div>
+
+            <div class="col-6">
+            </div>
+
+          </div>
+
+
 
         <script type="text/javascript">
 
