@@ -74,6 +74,10 @@ img.project-image-wolverine {
 	border: 4px solid #fffddb;	
 }
 
+img.no-border {
+	border: none;
+}
+
 p.project-title {
 	font-size: 2.1em;
 	font-weight: 600;
