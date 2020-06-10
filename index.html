@@ -24,7 +24,7 @@
 
   </head>
 
-  <body>
+  <body onload="zoom()">
 
     <header>
       <div class="row">
@@ -408,6 +408,10 @@
               growDiv.style.height = wrapper.clientHeight + "px";
             }
           }
+
+        function zoom() {
+            document.body.style.zoom = "80%" 
+        }
 
         </script>
 
