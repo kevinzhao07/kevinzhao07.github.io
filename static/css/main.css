@@ -85,7 +85,7 @@ p.project-title {
 
 div.scroll {
 	overflow-y: scroll;
-	max-height: 85vh;
+	max-height: 100vh;
 	overflow-x: hidden;
 	/* padding-bottom: 65px; */
 }
