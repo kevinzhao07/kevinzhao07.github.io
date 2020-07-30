@@ -153,6 +153,10 @@ i.absolute-icon {
 	right: 20px;
 }
 
+i.absolute-icon:hover {
+	cursor: pointer;
+}
+
 div#hidden-content {
 	transition: height .5s;
 	height: 0;
