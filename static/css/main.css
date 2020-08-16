@@ -67,9 +67,9 @@ p.profile-name {
 
 code.hello-world {
 	color: white;
-	border-radius: 5px;
 	background-color: #28282b;
 	font-size: 15px;
+	padding: 0px 2px;
 }
 
 p.bio {
@@ -115,6 +115,7 @@ div.projects-title {
 div.project-item {
 	margin-top: 20px;
 	position: relative;
+	margin-bottom: 10px;
 }
 
 img.project-display_image {
