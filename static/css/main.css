@@ -36,6 +36,26 @@ div#container {
 	margin: 0 auto;
 }
 
+/* ABOUT ME */
+div.about-section {
+	max-width: 550px;
+	display: inline-block;
+}
+
+div.technologies-section {
+	display: inline-block;
+	max-width: 250px;
+	margin-left: 35px;
+	vertical-align: 30px;
+}
+
+div.about-me {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 15px;
+	line-height: 24px;
+}
+
 /* PROFILE (LHS) */
 div.profile {
 	margin-top: 20px;
@@ -198,3 +218,4 @@ iframe.resume {
 	margin-top: 0;
 	margin-left: 200px;
 }
+
