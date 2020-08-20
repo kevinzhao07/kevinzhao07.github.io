@@ -46,7 +46,7 @@ div.technologies-section {
 	display: inline-block;
 	max-width: 250px;
 	margin-left: 35px;
-	vertical-align: 30px;
+	vertical-align: 15px;
 }
 
 div.about-me {
@@ -80,7 +80,7 @@ div.profile-about {
 }
 
 p.profile-name {
-	font-weight: 600;
+	font-weight: 700;
 	font-size: 35px;
 	margin-bottom: 5px;
 }
