@@ -143,7 +143,8 @@
           var today = new Date();
           var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
           var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var time = today_hours + ":" + today_minutes;
+          var today_seconds = today.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+          var time = today_hours + ":" + today_minutes + "<span class='seconds'>: " + today_seconds + " </span>";
           obj_time.innerHTML = time;
 
           if (value == end) {
