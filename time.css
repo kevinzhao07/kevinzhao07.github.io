@@ -122,7 +122,7 @@ p#age {
 }
 
 p#time-now{
-  font-size: 20vw;
+  font-size: 25vw;
   margin-top: -40px;
 }
 
@@ -131,13 +131,13 @@ p#percent_of_day {
 }
 
 p#age-max {
-  font-size: 6.5vw;
+  font-size: 7vw;
 }
 
 p#out-of {
   color: #f6fafb;
   font-size: 2.5vw;
-  margin: 5px 0px;
+  margin: -10px 0px 5px 0px;
 }
 
 p.misc {
@@ -150,7 +150,7 @@ h1.title-age {
   color: #d49c6b;
   font-size: 35px;
   margin: 0;
-  margin-top: 50px;
+  margin-top: 0px;
 }
 
 h1.title-age-one {
