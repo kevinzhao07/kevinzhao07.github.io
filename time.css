@@ -118,12 +118,12 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 }
 
 p#age {
-  margin-top: -20px;
+  margin-top: -40px;
 }
 
 p#time-now{
   font-size: 25vw;
-  margin-top: -55px;
+  margin-top: -75px;
 }
 
 p#percent_of_day {
