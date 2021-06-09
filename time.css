@@ -118,7 +118,7 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 }
 
 p#age {
-  margin-top: -40px;
+  margin-top: -30px;
 }
 
 p#time-now{
@@ -166,7 +166,7 @@ div#time {
   width: 90%;
   height: 275px; 
   margin: 0 auto;
-  margin-top: 110px;
+  margin-top: 70px;
 }
 
 div.time {
