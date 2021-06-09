@@ -39,10 +39,9 @@
       <p id="age-max">78.540</p>
     </div>
 
-    <div id="age_stats" class="age_stats">
-      <h1 class="title-age">you've lived: </h1>
-      <p id="percent"></p>
-      <p class="misc"> of your life </p>
+    <div id="time" class="time">
+      <h1 class="title-age">it is:</h1>
+      <p id="time-now"></p>
     </div>
 
     <div id="day_percent" class="day_percent">
@@ -101,8 +100,8 @@
       document.getElementById("age").innerHTML = age;
       var element = document.getElementById("age_counter");
       element.classList.remove("age_counter");
-      var element = document.getElementById("age_stats");
-      element.classList.remove("age_stats");
+      var element = document.getElementById("time");
+      element.classList.remove("time");
       var element = document.getElementById("day_percent");
       element.classList.remove("day_percent");
       var element = document.getElementById("birthdate");
@@ -118,7 +117,7 @@
       // assumes integer values for start and end
       
       var obj = document.getElementById(id);
-      var obj_percent = document.getElementById("percent");
+      var obj_time = document.getElementById("time-now");
       var range = end - start;
       // no timer shorter than 50ms (not really visible any way)
       var minTimer = 50;
@@ -143,19 +142,18 @@
             value = value.toString();
             value += "%";
             obj.innerHTML = value;
+
+            var today = new Date();
+            var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+            var time = today_hours + ":" + today.getMinutes();
+            obj_time.innerHTML = time;
+
           }
 
           else {
             // edit value
             var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
             obj.innerHTML = value.toFixed(9)
-
-            // edit percent
-            var percent = value / end * 100000000000.0
-            percent = percent.toFixed(4)
-            percent = percent.toString()
-            percent += "%"
-            obj_percent.innerHTML = percent
           }
 
           if (value == end) {

@@ -102,23 +102,27 @@ div.age_counter {
 div#age_counter {
   text-align: center;
   margin-top: 12%;
-  width: 55%;
+  width: 63%;
   height: 275px; 
   float: left;
 }
 
-p#age, p#age-max, p#percent, p#percent_of_day {
+p#age, p#age-max, p#time-now, p#percent_of_day {
   color: #f6fafb;
-  font-size: 135px;
+  font-size: 150px;
   margin: 0px;
 }
 
-p#percent{
-  font-size: 135px;
+p#age {
+  margin: 0px 0px 0px 20px;
+}
+
+p#time-now{
+  font-size: 150px;
 }
 
 p#percent_of_day {
-  font-size: 160px;
+  font-size: 120px;
 }
 
 p#age-max {
@@ -144,14 +148,14 @@ h1.title-age {
 }
 
 /* AGE STATS */
-div#age_stats {
+div#time {
   float: left;
   text-align: center;
-  width: 43%;
-  margin-top: 75px;
+  width: 35%;
+  margin-top: 90px;
 }
 
-div.age_stats {
+div.time {
   display: none;
 }
 
@@ -162,6 +166,6 @@ div.day_percent {
 div#day_percent {
   float: left;
   text-align: center;
-  width: 43%;
+  width: 35%;
   margin-top: 75px;
 }
