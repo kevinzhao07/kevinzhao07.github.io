@@ -123,7 +123,7 @@ p#age {
 
 p#time-now{
   font-size: 25vw;
-  margin-top: -40px;
+  margin-top: -55px;
 }
 
 p#percent_of_day {
@@ -150,7 +150,7 @@ h1.title-age {
   color: #d49c6b;
   font-size: 35px;
   margin: 0;
-  margin-top: 0px;
+  margin-top: -25px;
 }
 
 h1.title-age-one {
