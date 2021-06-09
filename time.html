@@ -145,9 +145,10 @@
 
             var today = new Date();
             var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-            var time = today_hours + ":" + today.getMinutes();
+            var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+            var time = today_hours + ":" + today_minutes;
             obj_time.innerHTML = time;
-
+5
           }
 
           else {
