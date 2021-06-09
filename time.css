@@ -1,0 +1,111 @@
+@font-face { font-family: Sans; src: url('Source_Sans_Pro/SourceSansPro-Regular.ttf'); } 
+
+/* ALL */
+* {
+  font-family: Sans;
+}
+
+body.bg {
+  background-color:#252b31;
+}
+
+/* BIRTHDAY FORM ENTRY SECTION */
+
+div.birthdate {
+  display: none;
+}
+
+div.header {
+  text-align: center;
+}
+
+img.cake {
+  width: 200px;
+  margin-top: 5%;
+}
+
+h1.title, label {
+  color: #d49c6b;
+}
+
+div.content {
+  text-align: center;
+}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+label {
+  font-size: 24px;
+}
+
+input, label {
+  display: block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance:textfield; /* Firefox */
+}
+
+input.input-date {
+  width: 100px;
+  font-size: 40px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  color: #252b31;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background-color: #c1c8c7;
+  text-align: center;
+}
+
+input:hover, input:active, input:focus {
+  border: 0;
+  border-width:0px;
+  outline: 0;
+}
+
+button.submit {
+  background-color: #252b31;
+  border: none;
+  border-radius: 5px;
+  color: #d49c6b;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+p#error {
+  color: #f6fafb;
+}
+
+/* AGE SECTION */
+div.age_counter {
+  display: none;
+}
+
+div#age_counter {
+  text-align: center;
+  margin-top: 5%;
+}
+
+p#age, p#age-max {
+  color: #f6fafb;
+  font-size: 55px;
+  margin: 0px 10px;
+}
+
+p#out-of {
+  color: #f6fafb;
+  font-size: 20px;
+}

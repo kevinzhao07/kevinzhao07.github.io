@@ -1,1 +1,135 @@
-test
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>age counter</title>
+    <link rel="stylesheet" href="time.css">
+    <script src="https://kit.fontawesome.com/59df0f1cf2.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body class="bg">
+
+    <div id="birthdate">
+
+      <div class="header">
+        <img class="cake" src="images/cake.png">
+        <h1 class="title">when's your birthday?</h1>
+      </div>
+
+      <div class="content">
+        <form onsubmit="return calculate_age()">
+          <label> month </label>
+          <input id="month" class="input-date" type="text" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>        
+          <label> day </label>
+          <input id="day" class="input-date" type="text" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>        
+          <label> year </label>
+          <input id="year" class="input-date" type="text" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>        
+          <button class="submit" type="submit" name="Submit" val><i class="fas fa-arrow-right"></i></button>
+          <p id="error"></p>
+        </form>
+      </div>
+
+    </div>
+
+    <div id="age_counter" class="age_counter">
+      <h1 class="title">your current age</h1>
+      <p id="age"></p>
+      <p id="out-of"> out of </p>
+      <p id="age-max">78.540000000</p>
+
+
+      <p id="percent"></p>
+
+    </div>
+
+  </body>
+
+  <script>
+    function calculate_age() {
+      // get constants from user input
+      var month = document.getElementById("month").value;
+      var day = document.getElementById("day").value;
+      var year = document.getElementById("year").value;
+      var now = new Date();
+
+      // error handling (if year is incorrect)
+      if (year < 1000) {
+        document.getElementById("error").innerHTML = "Please enter a valid date.";
+        return false;
+      }
+      
+      // if date is invalid, re-ask user for input
+      var birthday = new Date(year + "/" + month + "/" + day);
+      if (birthday == "Invalid Date") {
+        document.getElementById("error").innerHTML = "Please enter a valid date.";
+        return false;
+      }
+
+      if (birthday >= now) {
+        document.getElementById("error").innerHTML = "Entered date must be before today.";
+        return false;
+      }
+
+      // calculate current age, and time til 82
+      var ms_year = 31557807360
+      var curr_age = (now.getTime() - birthday.getTime()) * 1.0 / ms_year
+      var years_left = 78.54 - curr_age
+      var curr_age_time = curr_age * 1000000000
+      var years_left_time = years_left * ms_year
+
+      // calculate percentage
+      var percentage = curr_age / 78.54 * 100.0
+      console.log(percentage)
+
+      // change HTML design after submitting age
+      document.getElementById("age").innerHTML = age;
+      var element = document.getElementById("age_counter");
+      element.classList.remove("age_counter");
+      var element = document.getElementById("birthdate");
+      element.classList.add("birthdate");
+      
+      animateValue("age", curr_age_time, 78540000000, years_left_time);
+      animatePercent("percent", curr_age_time, 78540000000, years_left_time);
+
+      return false;
+    }
+
+    function animateValue(id, start, end, duration) {
+      // assumes integer values for start and end
+      
+      var obj = document.getElementById(id);
+      var range = end - start;
+      // no timer shorter than 50ms (not really visible any way)
+      var minTimer = 50;
+      // calc step time to show all interediate values
+      var stepTime = Math.abs(Math.floor(duration / range));
+      
+      // never go below minTimer
+      stepTime = Math.max(stepTime, minTimer);
+      
+      // get current time and calculate desired end time
+      var startTime = new Date().getTime();
+      var endTime = startTime + duration;
+      var timer;
+    
+      function run() {
+          var now = new Date().getTime();
+          var remaining = Math.max((endTime - now) / duration, 0);
+          var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
+          
+          obj.innerHTML = value.toFixed(9)
+          if (value == end) {
+              clearInterval(timer);
+          }
+      }
+      
+      timer = setInterval(run, stepTime);
+      run();
+    }
+  
+    function animatePercent(id, start, end, duration) {
+      return false;
+    }
+  </script>
+
+</html>
