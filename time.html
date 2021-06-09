@@ -33,14 +33,22 @@
     </div>
 
     <div id="age_counter" class="age_counter">
-      <h1 class="title">your current age</h1>
-      <p id="age"></p>
-      <p id="out-of"> out of </p>
-      <p id="age-max">78.540000000</p>
+      <h1 class="title-age">your current age:</h1>
+      <p id="age">78.540000000</p>
+      <p id="out-of"> out of (expected) </p>
+      <p id="age-max">78.540</p>
+    </div>
 
-
+    <div id="age_stats" class="age_stats">
+      <h1 class="title-age">you've lived: </h1>
       <p id="percent"></p>
+      <p class="misc"> of your life </p>
+    </div>
 
+    <div id="day_percent" class="day_percent">
+      <h1 class="title-age">today is already: </h1>
+      <p id="percent_of_day"></p>
+      <p class="misc"> over. do something. </p>
     </div>
 
   </body>
@@ -80,17 +88,28 @@
 
       // calculate percentage
       var percentage = curr_age / 78.54 * 100.0
-      console.log(percentage)
+
+      // calculate current time
+      var then = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+          0,0,0),
+      diff = now.getTime() - then.getTime();
 
       // change HTML design after submitting age
       document.getElementById("age").innerHTML = age;
       var element = document.getElementById("age_counter");
       element.classList.remove("age_counter");
+      var element = document.getElementById("age_stats");
+      element.classList.remove("age_stats");
+      var element = document.getElementById("day_percent");
+      element.classList.remove("day_percent");
       var element = document.getElementById("birthdate");
       element.classList.add("birthdate");
       
       animateValue("age", curr_age_time, 78540000000, years_left_time);
-      animatePercent("percent", curr_age_time, 78540000000, years_left_time);
+      animateValue("percent_of_day", diff, 24*60*60*1000, 24*60*60*1000 - diff)
 
       return false;
     }
@@ -99,6 +118,7 @@
       // assumes integer values for start and end
       
       var obj = document.getElementById(id);
+      var obj_percent = document.getElementById("percent");
       var range = end - start;
       // no timer shorter than 50ms (not really visible any way)
       var minTimer = 50;
@@ -116,9 +136,28 @@
       function run() {
           var now = new Date().getTime();
           var remaining = Math.max((endTime - now) / duration, 0);
-          var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
-          
-          obj.innerHTML = value.toFixed(9)
+
+          if (id == "percent_of_day") {
+            var value = Math.round(end - (remaining * range)) * 1.0 / (24 * 60 * 60 * 1000) * 100;
+            value = value.toFixed(3);
+            value = value.toString();
+            value += "%";
+            obj.innerHTML = value;
+          }
+
+          else {
+            // edit value
+            var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
+            obj.innerHTML = value.toFixed(9)
+
+            // edit percent
+            var percent = value / end * 100000000000.0
+            percent = percent.toFixed(4)
+            percent = percent.toString()
+            percent += "%"
+            obj_percent.innerHTML = percent
+          }
+
           if (value == end) {
               clearInterval(timer);
           }
@@ -128,9 +167,7 @@
       run();
     }
   
-    function animatePercent(id, start, end, duration) {
-      return false;
-    }
+    
   </script>
 
 </html>

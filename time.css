@@ -3,12 +3,17 @@
 /* ALL */
 * {
   font-family: Sans;
+  /* border: 1px solid red; */
 }
 
 body.bg {
   background-color:#252b31;
+  margin: 0;
 }
 
+html, body {
+  height: 100%;
+}
 /* BIRTHDAY FORM ENTRY SECTION */
 
 div.birthdate {
@@ -21,7 +26,7 @@ div.header {
 
 img.cake {
   width: 200px;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 h1.title, label {
@@ -96,16 +101,67 @@ div.age_counter {
 
 div#age_counter {
   text-align: center;
-  margin-top: 5%;
+  margin-top: 12%;
+  width: 55%;
+  height: 275px; 
+  float: left;
 }
 
-p#age, p#age-max {
+p#age, p#age-max, p#percent, p#percent_of_day {
   color: #f6fafb;
-  font-size: 55px;
-  margin: 0px 10px;
+  font-size: 135px;
+  margin: 0px;
+}
+
+p#percent{
+  font-size: 135px;
+}
+
+p#percent_of_day {
+  font-size: 160px;
+}
+
+p#age-max {
+  font-size: 70px;
 }
 
 p#out-of {
   color: #f6fafb;
   font-size: 20px;
+  margin: 5px 0px;
+}
+
+p.misc {
+  color: #f6fafb;
+  font-size: 20px;
+  margin: 0;
+}
+
+h1.title-age {
+  color: #d49c6b;
+  margin: -10px 0px 10px 0px;
+  font-size: 35px;
+}
+
+/* AGE STATS */
+div#age_stats {
+  float: left;
+  text-align: center;
+  width: 43%;
+  margin-top: 75px;
+}
+
+div.age_stats {
+  display: none;
+}
+
+div.day_percent {
+  display: none;
+}
+
+div#day_percent {
+  float: left;
+  text-align: center;
+  width: 43%;
+  margin-top: 75px;
 }
