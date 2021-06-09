@@ -32,23 +32,25 @@
 
     </div>
 
-    <div id="age_counter" class="age_counter">
-      <h1 class="title-age">your current age:</h1>
-      <p id="age">78.540000000</p>
-      <p id="out-of"> out of (expected) </p>
-      <p id="age-max">78.540</p>
+    <div id="container">
+      <div id="age_counter" class="age_counter">
+        <h1 class="title-age">your current age:</h1>
+        <p id="age">78.540000000</p>
+        <p id="out-of"> out of (expected) </p>
+        <p id="age-max">78.540</p>
+      </div>
+  
+      <div id="time" class="time">
+        <h1 class="title-age">it is:</h1>
+        <p id="time-now"></p>
+      </div>
     </div>
 
-    <div id="time" class="time">
-      <h1 class="title-age">it is:</h1>
-      <p id="time-now"></p>
-    </div>
-
-    <div id="day_percent" class="day_percent">
+    <!-- <div id="day_percent" class="day_percent">
       <h1 class="title-age">today is already: </h1>
       <p id="percent_of_day"></p>
       <p class="misc"> over. do something. </p>
-    </div>
+    </div> -->
 
   </body>
 
@@ -102,13 +104,11 @@
       element.classList.remove("age_counter");
       var element = document.getElementById("time");
       element.classList.remove("time");
-      var element = document.getElementById("day_percent");
-      element.classList.remove("day_percent");
       var element = document.getElementById("birthdate");
       element.classList.add("birthdate");
       
       animateValue("age", curr_age_time, 78540000000, years_left_time);
-      animateValue("percent_of_day", diff, 24*60*60*1000, 24*60*60*1000 - diff)
+      // animateValue("percent_of_day", diff, 24*60*60*1000, 24*60*60*1000 - diff)
 
       return false;
     }
@@ -136,26 +136,15 @@
           var now = new Date().getTime();
           var remaining = Math.max((endTime - now) / duration, 0);
 
-          if (id == "percent_of_day") {
-            var value = Math.round(end - (remaining * range)) * 1.0 / (24 * 60 * 60 * 1000) * 100;
-            value = value.toFixed(3);
-            value = value.toString();
-            value += "%";
-            obj.innerHTML = value;
+          // edit value
+          var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
+          obj.innerHTML = value.toFixed(9)
 
-            var today = new Date();
-            var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-            var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-            var time = today_hours + ":" + today_minutes;
-            obj_time.innerHTML = time;
-5
-          }
-
-          else {
-            // edit value
-            var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
-            obj.innerHTML = value.toFixed(9)
-          }
+          var today = new Date();
+          var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+          var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+          var time = today_hours + ":" + today_minutes;
+          obj_time.innerHTML = time;
 
           if (value == end) {
               clearInterval(timer);

@@ -14,6 +14,11 @@ body.bg {
 html, body {
   height: 100%;
 }
+
+div#container {
+  width: 100%;
+}
+
 /* BIRTHDAY FORM ENTRY SECTION */
 
 div.birthdate {
@@ -101,10 +106,9 @@ div.age_counter {
 
 div#age_counter {
   text-align: center;
-  margin-top: 36vh;
   width: 60%;
   height: 275px; 
-  float: left;
+  margin: 0 auto;
 }
 
 p#age, p#age-max, p#time-now, p#percent_of_day {
@@ -144,16 +148,16 @@ p.misc {
 
 h1.title-age {
   color: #d49c6b;
-  margin: -10px 0px 0px 0px;
   font-size: 35px;
 }
 
 /* AGE STATS */
 div#time {
-  float: left;
   text-align: center;
   width: 38%;
-  margin-top: 30vh;
+  height: 275px; 
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 div.time {
