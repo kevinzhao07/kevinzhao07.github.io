@@ -43,6 +43,7 @@
       <div id="time" class="time">
         <h1 class="title-age">it is:</h1>
         <p id="time-now"></p>
+        <p id="date-now"></p>
       </div>
     </div>
 
@@ -118,6 +119,7 @@
       
       var obj = document.getElementById(id);
       var obj_time = document.getElementById("time-now");
+      var obj_date = document.getElementById("date-now");
       var range = end - start;
       // no timer shorter than 50ms (not really visible any way)
       var minTimer = 50;
@@ -146,6 +148,15 @@
           var today_seconds = today.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
           var time = today_hours + ":" + today_minutes + "<span class='seconds'>: " + today_seconds + " </span>";
           obj_time.innerHTML = time;
+
+          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+          var today_month = months[today.getMonth()];
+          var today_date = today.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+          var today_year = today.getFullYear();
+          var today_day = days[today.getDay()];
+          var date = today_day + ", " + today_month + " " + today_date + ", " + today_year
+          obj_date.innerHTML = date;
 
           if (value == end) {
               clearInterval(timer);

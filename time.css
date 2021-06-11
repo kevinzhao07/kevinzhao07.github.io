@@ -126,6 +126,13 @@ p#time-now{
   margin-top: -65px;
 }
 
+p#date-now{
+  font-size: 4vw;
+  color: #f6fafb;
+  color: #d49c6b;
+  margin-top: -50px;
+}
+
 p#percent_of_day {
   font-size: 8vw;
 }
@@ -137,7 +144,7 @@ p#age-max {
 p#out-of {
   color: #f6fafb;
   font-size: 2.5vw;
-  margin: -10px 0px 5px 0px;
+  margin: -15px 0px 0px 0px;
 }
 
 p.misc {
