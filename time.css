@@ -9,6 +9,8 @@
 body.bg {
   background-color:#252b31;
   margin: 0;
+  /* background-image: url('images/starry.jpg');
+  background-position: -1vh -50vh ; */
 }
 
 html, body {
@@ -119,10 +121,11 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 
 p#age {
   margin-top: -20px;
+  font-size: 11vw;
 }
 
 p#time-now{
-  font-size: 25vw;
+  font-size: 21vw;
   margin-top: -65px;
 }
 
