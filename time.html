@@ -25,7 +25,7 @@
           <input id="day" class="input-date" type="text" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>        
           <label> year </label>
           <input id="year" class="input-date" type="text" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>        
-          <button class="submit" type="submit" name="Submit" val><i class="fas fa-arrow-right"></i></button>
+          <button class="submit" type="submit" name="Submit" val><i class="reg fas fa-arrow-right"></i></button>
           <p id="error"></p>
         </form>
       </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div id="footer">
+    <div id="footer" class="footer">
       <div id="weather">
         <div id="one"></div>
         <div id="two"></div>
@@ -111,6 +111,8 @@
       element.classList.remove("age_counter");
       var element = document.getElementById("time");
       element.classList.remove("time");
+      var element = document.getElementById("footer");
+      element.classList.remove("footer");
       var element = document.getElementById("birthdate");
       element.classList.add("birthdate");
       

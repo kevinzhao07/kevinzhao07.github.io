@@ -179,7 +179,7 @@ div#time {
   margin-top: 60px;
 }
 
-div.time {
+div.time, div.footer {
   display: none;
 }
 
@@ -214,6 +214,10 @@ div#two, div#three {
 i {
   font-size: 10vw;
   color: #f6fafb;
+}
+
+i.reg {
+  font-size: 4vw;
 }
 
 h1.temp {
