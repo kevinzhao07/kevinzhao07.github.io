@@ -45,6 +45,14 @@
       </div>
     </div>
 
+    <div id="footer">
+      <div id="weather">
+        <div id="one"></div>
+        <div id="two"></div>
+        <div id="three"></div>
+      </div>
+    </div>
+
     <!-- <div id="day_percent" class="day_percent">
       <h1 class="title-age">today is already: </h1>
       <p id="percent_of_day"></p>
@@ -107,7 +115,6 @@
       element.classList.add("birthdate");
       
       animateValue("age", curr_age_time, 78540000000, years_left_time);
-      // animateValue("percent_of_day", diff, 24*60*60*1000, 24*60*60*1000 - diff)
 
       return false;
     }
@@ -157,15 +164,132 @@
           obj_date.innerHTML = date;
 
           if (value == end) {
-              clearInterval(timer);
+            clearInterval(timer);
           }
       }
       
       timer = setInterval(run, stepTime);
       run();
     }
-  
     
+
+    var weather_one = document.getElementById("one");
+    var weather_two = document.getElementById("two");
+    var weather_three = document.getElementById("three");
+    let data = {}
+    let request = new XMLHttpRequest();
+      request.open("GET", "http://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=Ann Arbor&days=2&aqi=no&alerts=no");
+      request.send();
+      request.onload = () => {
+        console.log(request);
+
+        // do all the weather updating here
+        if (request.status === 200) {
+          data = JSON.parse(request.response);
+          data = data["forecast"]["forecastday"]
+          weather_today = data[0]["hour"]
+          weather_tom = data[1]["hour"]
+
+          // calculating what hour to start at (next hour)
+          var now = Date.now() / 1000;
+          var start_weather = 24;
+          for (var x = 0; x < weather_today.length; ++x) {
+            if (now < weather_today[x]["time_epoch"]) {
+              start_weather = x;
+              break;
+            }
+          }
+
+          for (var x = 0; x < weather_tom.length; ++x) {
+            weather_today.push(weather_tom[x]);
+          }
+
+          // finding weather for next 3 hours
+          weather_data = []
+          weather_data.push(weather_today[start_weather++])
+          weather_data.push(weather_today[start_weather++])
+          weather_data.push(weather_today[start_weather++])
+          console.log(weather_data)
+
+          var icons = []
+          for (var x = 0; x < weather_data.length; ++x) {
+            var condition = weather_data[x]["condition"]["text"].toLowerCase();
+            var code = weather_data[x]["condition"]["code"];
+            var day = weather_data[x]["is_day"];
+            var hour = weather_data[x]["time"].substring(11, 13)
+            var icon = "";
+
+            if (condition == "sunny") {
+              icon = '<i class="fas fa-sun"></i>'
+            }
+
+            else if (condition == "clear") {
+              icon = '<i class="fas fa-moon"></i>'
+            }
+
+            else if (condition == "partly cloudy") {
+              if (day == 0) {
+                icon = '<i class="fas fa-cloud-moon"></i>'
+              }
+              else {
+                icon = '<i class="fas fa-cloud-sun"></i>'
+              }
+            }
+
+            else if (condition == "cloudy" || condition == "overcast") {
+              icon = '<i class="fas fa-cloud"></i>'
+            }
+
+            else if (code == 1030 || code == 1135 || code == 1147) {
+              icon = '<i class="fas fa-smog"></i>'
+            }
+
+            else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+              
+              icon = '<i class="fas fa-cloud-rain"></i>';
+              
+              if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
+                icon = '<i class="fas fa-cloud-showers-heavy"></i>'
+              }
+
+              if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+                icon = '<i class="far fa-snowflake"></i>'
+              }
+
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+
+            }
+
+            else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              icon = '<i class="far fa-snowflake"></i>'
+
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+            }
+
+            else if (condition.includes("thundery")) {
+              icon = '<i class="fas fa-bolt"></i>';
+            }
+            icon += "<h1 class='temp'>"+ Math.round(weather_data[x]["temp_f"]) +"</h1>"
+            icon = "<h3>" + hour + "</h3>" + icon;
+            icons.push(icon);
+          }
+
+          // add icons to divs (based on weather)
+          weather_one.innerHTML = icons[0]
+          weather_two.innerHTML = icons[1]
+          weather_three.innerHTML = icons[2] 
+
+
+        } else {
+          console.log(`error ${request.status} ${request.statusText}`);
+        }
+      };
+
+
   </script>
 
 </html>

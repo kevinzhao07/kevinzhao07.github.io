@@ -176,7 +176,7 @@ div#time {
   width: 90%;
   height: 275px; 
   margin: 0 auto;
-  margin-top: 90px;
+  margin-top: 60px;
 }
 
 div.time {
@@ -185,4 +185,43 @@ div.time {
 
 span.seconds {
   font-size: 7.5vw;
+}
+
+/* WEATHER STATS */
+div#footer {
+  width: 95%;
+  margin: 0 auto;
+}
+
+div#weather {
+  width: 60%;
+  text-align: center;
+  color: #f6fafb;
+}
+
+div#one, div#two, div#three {
+  float: left;
+}
+
+div#one {
+  margin-left: 3vh;
+}
+
+div#two, div#three {
+  margin-left: 5vh;
+}
+
+i {
+  font-size: 10vw;
+  color: #f6fafb;
+}
+
+h1.temp {
+  font-size: 6vw;
+  margin: 5px 0px 0px 0px;
+}
+
+h3 {
+  margin: 0px 0px 10px 0px;
+  font-size: 4vw;
 }
