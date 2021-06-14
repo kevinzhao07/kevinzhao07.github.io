@@ -187,7 +187,7 @@
       var weather_three = document.getElementById("three");
       let data = {}
       let request = new XMLHttpRequest();
-        request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=Ann Arbor&days=2&aqi=no&alerts=no");
+        request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=48105&days=2&aqi=no&alerts=no");
         request.send();
         request.onload = () => {
 
@@ -221,6 +221,7 @@
             var icons = []
             for (var x = 0; x < weather_data.length; ++x) {
               var condition = weather_data[x]["condition"]["text"].toLowerCase();
+              console.log(condition);
               var code = weather_data[x]["condition"]["code"];
               var day = weather_data[x]["is_day"];
               var hour = weather_data[x]["time"].substring(11, 13)
