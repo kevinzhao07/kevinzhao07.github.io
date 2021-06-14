@@ -180,8 +180,7 @@
       run();
     }
 
-    function weatherStocks() {
-
+    function weather() {
       var weather_one = document.getElementById("one");
       var weather_two = document.getElementById("two");
       var weather_three = document.getElementById("three");
@@ -190,14 +189,14 @@
         request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=48105&days=2&aqi=no&alerts=no");
         request.send();
         request.onload = () => {
-
+  
           // do all the weather updating here
           if (request.status === 200) {
             data = JSON.parse(request.response);
             data = data["forecast"]["forecastday"]
             weather_today = data[0]["hour"]
             weather_tom = data[1]["hour"]
-
+  
             // calculating what hour to start at (next hour)
             var now = Date.now() / 1000;
             var start_weather = 24;
@@ -207,17 +206,17 @@
                 break;
               }
             }
-
+  
             for (var x = 0; x < weather_tom.length; ++x) {
               weather_today.push(weather_tom[x]);
             }
-
+  
             // finding weather for next 3 hours
             weather_data = []
             weather_data.push(weather_today[start_weather++])
             weather_data.push(weather_today[start_weather++])
             weather_data.push(weather_today[start_weather++])
-
+  
             var icons = []
             console.log(weather_data);
             for (var x = 0; x < weather_data.length; ++x) {
@@ -228,15 +227,15 @@
               var will_rain = weather_data[x]["will_it_rain"];
               var cloud = weather_data[x]["cloud"]
               var icon = "";
-
+  
               if (condition == "sunny") {
                 icon = '<i class="fas fa-sun"></i>'
               }
-
+  
               else if (condition == "clear") {
                 icon = '<i class="fas fa-moon"></i>'
               }
-
+  
               else if (will_rain == 0) {
                 // clear (no clouds)
                 if (cloud < 30) {
@@ -247,7 +246,7 @@
                     icon = '<i class="fas fa-moon"></i>'
                   }
                 }
-
+  
                 // partly cloudy
                 if (cloud >= 30 && cloud < 70) {
                   if (day == 1) {
@@ -257,12 +256,12 @@
                     icon = '<i class="fas fa-cloud-moon"></i>'
                   }
                 }
-
+  
                 else {
                   icon = '<i class="fas fa-cloud"></i>'
                 }
               }
-
+  
               else if (condition == "partly cloudy") {
                 if (day == 0) {
                   icon = '<i class="fas fa-cloud-moon"></i>'
@@ -271,15 +270,15 @@
                   icon = '<i class="fas fa-cloud-sun"></i>'
                 }
               }
-
+  
               else if (condition == "cloudy" || condition == "overcast") {
                 icon = '<i class="fas fa-cloud"></i>'
               }
-
+  
               else if (code == 1030 || code == 1135 || code == 1147) {
                 icon = '<i class="fas fa-smog"></i>'
               }
-
+  
               else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
                 
                 icon = '<i class="fas fa-cloud-rain"></i>';
@@ -287,25 +286,25 @@
                 if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
                   icon = '<i class="fas fa-cloud-showers-heavy"></i>'
                 }
-
+  
                 if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
                   icon = '<i class="far fa-snowflake"></i>'
                 }
-
+  
                 if (condition.includes('thunder')) {
                   icon = '<i class="fas fa-bolt"></i>'
                 }
-
+  
               }
-
+  
               else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
                 icon = '<i class="far fa-snowflake"></i>'
-
+  
                 if (condition.includes('thunder')) {
                   icon = '<i class="fas fa-bolt"></i>'
                 }
               }
-
+  
               else if (condition.includes("thundery")) {
                 icon = '<i class="fas fa-bolt"></i>';
               }
@@ -313,17 +312,21 @@
               icon = "<h3>" + hour + "</h3>" + icon;
               icons.push(icon);
             }
-
+  
             // add icons to divs (based on weather)
             weather_one.innerHTML = icons[0]
             weather_two.innerHTML = icons[1]
             weather_three.innerHTML = icons[2] 
-
+  
           } else {
             console.log(`error ${request.status} ${request.statusText}`);
           }
         };
 
+        setTimeout(weather, 60000)
+    }
+
+    function stonks() {
       stocks = ["VOO", "DIA", "QQQ"];
       for (var x = 0; x < stocks.length; ++x) {
         let request_stock = new XMLHttpRequest();
@@ -363,10 +366,11 @@
         };
       }
 
-      setTimeout(weatherStocks, 3500);
+      setTimeout(stonks, 3500);
     }
 
-    weatherStocks();
+    weather();
+    stonks();
     
   </script>
 
