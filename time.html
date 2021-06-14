@@ -219,12 +219,14 @@
             weather_data.push(weather_today[start_weather++])
 
             var icons = []
+            console.log(weather_data);
             for (var x = 0; x < weather_data.length; ++x) {
               var condition = weather_data[x]["condition"]["text"].toLowerCase();
-              console.log(condition);
               var code = weather_data[x]["condition"]["code"];
               var day = weather_data[x]["is_day"];
               var hour = weather_data[x]["time"].substring(11, 13)
+              var will_rain = weather_data[x]["will_it_rain"];
+              var cloud = weather_data[x]["cloud"]
               var icon = "";
 
               if (condition == "sunny") {
@@ -233,6 +235,32 @@
 
               else if (condition == "clear") {
                 icon = '<i class="fas fa-moon"></i>'
+              }
+
+              else if (will_rain == 0) {
+                // clear (no clouds)
+                if (cloud < 30) {
+                  if (day == 1) {
+                    icon = '<i class="fas fa-sun"></i>'
+                  }
+                  else {
+                    icon = '<i class="fas fa-moon"></i>'
+                  }
+                }
+
+                // partly cloudy
+                if (cloud >= 30 && cloud < 70) {
+                  if (day == 1) {
+                    icon = '<i class="fas fa-cloud-sun"></i>'
+                  }
+                  else {
+                    icon = '<i class="fas fa-cloud-moon"></i>'
+                  }
+                }
+
+                else {
+                  icon = '<i class="fas fa-cloud"></i>'
+                }
               }
 
               else if (condition == "partly cloudy") {
@@ -290,7 +318,6 @@
             weather_one.innerHTML = icons[0]
             weather_two.innerHTML = icons[1]
             weather_three.innerHTML = icons[2] 
-
 
           } else {
             console.log(`error ${request.status} ${request.statusText}`);
