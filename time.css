@@ -187,16 +187,48 @@ span.seconds {
   font-size: 7.5vw;
 }
 
+span.price {
+  float: right;
+}
+
 /* WEATHER STATS */
 div#footer {
   width: 95%;
   margin: 0 auto;
+  clear: both;
+  overflow: hidden;
+  text-align: center;
 }
 
 div#weather {
-  width: 60%;
+  width: 48%;
   text-align: center;
   color: #f6fafb;
+  float: left;
+  margin-left: 2%;
+}
+
+div#stocks {
+  width: 40%;
+  float: left;
+  color: #f6fafb;
+  font-size: 4vw;
+  height: 200px;
+  margin-top: 3vh;
+  margin-left: 3%;
+}
+
+div#VOO, div#DIA, div#QQQ {
+  margin: 0;
+  margin-bottom: 1vh;
+  text-align: justify;
+  font-weight: 700;
+  clear: both;
+}
+
+p.stock_name {
+  margin: 0;
+  float: left;
 }
 
 div#one, div#two, div#three {
@@ -204,28 +236,49 @@ div#one, div#two, div#three {
 }
 
 div#one {
-  margin-left: 3vh;
+  margin-left: 3vw;
 }
 
 div#two, div#three {
-  margin-left: 5vh;
+  margin-left: 5vw;
 }
 
 i {
-  font-size: 10vw;
-  color: #f6fafb;
+  font-size: 8vw;
+  color: #e6e6e6;
 }
 
 i.reg {
   font-size: 4vw;
+  color: #f6fafb;
+}
+
+i.up, i.down {
+  margin-left: 1vw;
+}
+
+.up {
+  font-size: 3.5vw;
+  color: #84bd77;
+}
+
+.down {
+  font-size: 3.5vw;
+  color: #b57272;
+}
+
+span.up, span.down {
+  font-size: 3.5vw;
+  margin-left: 0.3vw;
 }
 
 h1.temp {
-  font-size: 6vw;
+  font-size: 5vw;
   margin: 5px 0px 0px 0px;
 }
 
 h3 {
   margin: 0px 0px 10px 0px;
   font-size: 4vw;
+  color: #d49c6b;
 }
