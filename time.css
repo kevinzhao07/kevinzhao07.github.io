@@ -190,7 +190,6 @@ span.seconds {
 span.price {
   float: right;
   color: #f6fafb;
-  margin-left: 7vw;
 }
 
 /* WEATHER STATS */
