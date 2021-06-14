@@ -189,6 +189,7 @@ span.seconds {
 
 span.price {
   float: right;
+  color: #f6fafb;
 }
 
 /* WEATHER STATS */
@@ -211,10 +212,10 @@ div#weather {
 div#stocks {
   width: 40%;
   float: left;
-  color: #f6fafb;
-  font-size: 4vw;
+  color: #d49c6b;
+  font-size: 4.5vw;
   height: 200px;
-  margin-top: 3vh;
+  margin-top: 2vh;
   margin-left: 3%;
 }
 
