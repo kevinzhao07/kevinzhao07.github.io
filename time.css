@@ -206,11 +206,11 @@ div#weather {
   text-align: center;
   color: #f6fafb;
   float: left;
-  margin-left: 2%;
+  margin-left: 3%;
 }
 
 div#stocks {
-  width: 45%;
+  width: 42%;
   float: left;
   color: #d49c6b;
   font-size: 4.5vw;
