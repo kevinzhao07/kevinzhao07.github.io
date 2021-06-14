@@ -120,7 +120,7 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 }
 
 p#age {
-  margin-top: -20px;
+  margin-top: -30px;
   font-size: 11vw;
 }
 
@@ -160,7 +160,7 @@ h1.title-age {
   color: #d49c6b;
   font-size: 35px;
   margin: 0;
-  margin-top: -30px;
+  margin-top: -55px;
 }
 
 h1.title-age-one {
@@ -199,6 +199,7 @@ div#footer {
   clear: both;
   overflow: hidden;
   text-align: center;
+  margin-top: -2vh;
 }
 
 div#weather {
@@ -207,6 +208,7 @@ div#weather {
   color: #f6fafb;
   float: left;
   margin-left: 3%;
+  margin-right: 1.5%;
 }
 
 div#stocks {
