@@ -312,7 +312,7 @@
             var price = stock_data["c"].toFixed(2 );
             var last_close = stock_data["pc"]
             var change = (price - last_close) / last_close * 100.0
-            var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + stock_data["c"];
+            var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + stock_data["c"].toFixed(2);
             
             if (change < 0) {
               stock_info += '<i class="down fas fa-long-arrow-alt-down"></i>';
