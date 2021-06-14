@@ -308,7 +308,6 @@
           
           if (request_stock.status === 200) {
             stock_data = JSON.parse(request_stock.response);
-            console.log(stock_data)
 
             var price = stock_data["c"];
             var last_close = stock_data["pc"]
