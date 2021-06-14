@@ -210,7 +210,7 @@ div#weather {
 }
 
 div#stocks {
-  /* width: 45%; */
+  width: 45%;
   float: left;
   color: #d49c6b;
   font-size: 4.5vw;
