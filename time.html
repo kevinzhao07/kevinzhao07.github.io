@@ -187,7 +187,7 @@
       var weather_three = document.getElementById("three");
       let data = {}
       let request = new XMLHttpRequest();
-        request.open("GET", "http://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=Ann Arbor&days=2&aqi=no&alerts=no");
+        request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=Ann Arbor&days=2&aqi=no&alerts=no");
         request.send();
         request.onload = () => {
 
