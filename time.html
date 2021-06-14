@@ -309,7 +309,7 @@
           if (request_stock.status === 200) {
             stock_data = JSON.parse(request_stock.response);
 
-            var price = stock_data["c"];
+            var price = stock_data["c"].toFixed(2);
             var last_close = stock_data["pc"]
             var change = (price - last_close) / last_close * 100.0
             var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + stock_data["c"];
