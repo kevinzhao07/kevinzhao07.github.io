@@ -179,217 +179,167 @@
       timer = setInterval(run, stepTime);
       run();
     }
-    
 
-    function animateWeather(id, start, end, duration) {
-      // assumes integer values for start and end
-      
-      var obj = document.getElementById(id);
-      var obj_time = document.getElementById("time-now");
-      var obj_date = document.getElementById("date-now");
-      var range = end - start;
-      // no timer shorter than 50ms (not really visible any way)
-      var minTimer = 50;
-      // calc step time to show all interediate values
-      var stepTime = Math.abs(Math.floor(duration / range));
-      
-      // never go below minTimer
-      stepTime = Math.max(stepTime, minTimer);
-      
-      // get current time and calculate desired end time
-      var startTime = new Date().getTime();
-      var endTime = startTime + duration;
-      var timer;
-    
-      function run() {
-          var now = new Date().getTime();
-          var remaining = Math.max((endTime - now) / duration, 0);
+    function weatherStocks() {
 
-          // edit value
-          var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
-          obj.innerHTML = value.toFixed(9)
+      var weather_one = document.getElementById("one");
+      var weather_two = document.getElementById("two");
+      var weather_three = document.getElementById("three");
+      let data = {}
+      let request = new XMLHttpRequest();
+        request.open("GET", "http://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=Ann Arbor&days=2&aqi=no&alerts=no");
+        request.send();
+        request.onload = () => {
 
-          var today = new Date();
-          var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var today_seconds = today.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var time = today_hours + ":" + today_minutes + "<span class='seconds'>: " + today_seconds + " </span>";
-          obj_time.innerHTML = time;
+          // do all the weather updating here
+          if (request.status === 200) {
+            data = JSON.parse(request.response);
+            data = data["forecast"]["forecastday"]
+            weather_today = data[0]["hour"]
+            weather_tom = data[1]["hour"]
 
-          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-          var today_month = months[today.getMonth()];
-          var today_date = today.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var today_year = today.getFullYear();
-          var today_day = days[today.getDay()];
-          var date = today_day + ", " + today_month + " " + today_date + ", " + today_year
-          obj_date.innerHTML = date;
-
-          if (value == end) {
-            clearInterval(timer);
-          }
-      }
-      
-      timer = setInterval(run, stepTime);
-      run();
-    }
-
-    var weather_one = document.getElementById("one");
-    var weather_two = document.getElementById("two");
-    var weather_three = document.getElementById("three");
-    let data = {}
-    let request = new XMLHttpRequest();
-      request.open("GET", "http://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=Ann Arbor&days=2&aqi=no&alerts=no");
-      request.send();
-      request.onload = () => {
-
-        // do all the weather updating here
-        if (request.status === 200) {
-          data = JSON.parse(request.response);
-          data = data["forecast"]["forecastday"]
-          weather_today = data[0]["hour"]
-          weather_tom = data[1]["hour"]
-
-          // calculating what hour to start at (next hour)
-          var now = Date.now() / 1000;
-          var start_weather = 24;
-          for (var x = 0; x < weather_today.length; ++x) {
-            if (now < weather_today[x]["time_epoch"]) {
-              start_weather = x;
-              break;
-            }
-          }
-
-          for (var x = 0; x < weather_tom.length; ++x) {
-            weather_today.push(weather_tom[x]);
-          }
-
-          // finding weather for next 3 hours
-          weather_data = []
-          weather_data.push(weather_today[start_weather++])
-          weather_data.push(weather_today[start_weather++])
-          weather_data.push(weather_today[start_weather++])
-
-          var icons = []
-          for (var x = 0; x < weather_data.length; ++x) {
-            var condition = weather_data[x]["condition"]["text"].toLowerCase();
-            var code = weather_data[x]["condition"]["code"];
-            var day = weather_data[x]["is_day"];
-            var hour = weather_data[x]["time"].substring(11, 13)
-            var icon = "";
-
-            if (condition == "sunny") {
-              icon = '<i class="fas fa-sun"></i>'
-            }
-
-            else if (condition == "clear") {
-              icon = '<i class="fas fa-moon"></i>'
-            }
-
-            else if (condition == "partly cloudy") {
-              if (day == 0) {
-                icon = '<i class="fas fa-cloud-moon"></i>'
-              }
-              else {
-                icon = '<i class="fas fa-cloud-sun"></i>'
+            // calculating what hour to start at (next hour)
+            var now = Date.now() / 1000;
+            var start_weather = 24;
+            for (var x = 0; x < weather_today.length; ++x) {
+              if (now < weather_today[x]["time_epoch"]) {
+                start_weather = x;
+                break;
               }
             }
 
-            else if (condition == "cloudy" || condition == "overcast") {
-              icon = '<i class="fas fa-cloud"></i>'
+            for (var x = 0; x < weather_tom.length; ++x) {
+              weather_today.push(weather_tom[x]);
             }
 
-            else if (code == 1030 || code == 1135 || code == 1147) {
-              icon = '<i class="fas fa-smog"></i>'
-            }
+            // finding weather for next 3 hours
+            weather_data = []
+            weather_data.push(weather_today[start_weather++])
+            weather_data.push(weather_today[start_weather++])
+            weather_data.push(weather_today[start_weather++])
 
-            else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
-              
-              icon = '<i class="fas fa-cloud-rain"></i>';
-              
-              if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
-                icon = '<i class="fas fa-cloud-showers-heavy"></i>'
+            var icons = []
+            for (var x = 0; x < weather_data.length; ++x) {
+              var condition = weather_data[x]["condition"]["text"].toLowerCase();
+              var code = weather_data[x]["condition"]["code"];
+              var day = weather_data[x]["is_day"];
+              var hour = weather_data[x]["time"].substring(11, 13)
+              var icon = "";
+
+              if (condition == "sunny") {
+                icon = '<i class="fas fa-sun"></i>'
               }
 
-              if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              else if (condition == "clear") {
+                icon = '<i class="fas fa-moon"></i>'
+              }
+
+              else if (condition == "partly cloudy") {
+                if (day == 0) {
+                  icon = '<i class="fas fa-cloud-moon"></i>'
+                }
+                else {
+                  icon = '<i class="fas fa-cloud-sun"></i>'
+                }
+              }
+
+              else if (condition == "cloudy" || condition == "overcast") {
+                icon = '<i class="fas fa-cloud"></i>'
+              }
+
+              else if (code == 1030 || code == 1135 || code == 1147) {
+                icon = '<i class="fas fa-smog"></i>'
+              }
+
+              else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+                
+                icon = '<i class="fas fa-cloud-rain"></i>';
+                
+                if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
+                  icon = '<i class="fas fa-cloud-showers-heavy"></i>'
+                }
+
+                if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+                  icon = '<i class="far fa-snowflake"></i>'
+                }
+
+                if (condition.includes('thunder')) {
+                  icon = '<i class="fas fa-bolt"></i>'
+                }
+
+              }
+
+              else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
                 icon = '<i class="far fa-snowflake"></i>'
+
+                if (condition.includes('thunder')) {
+                  icon = '<i class="fas fa-bolt"></i>'
+                }
               }
 
-              if (condition.includes('thunder')) {
-                icon = '<i class="fas fa-bolt"></i>'
+              else if (condition.includes("thundery")) {
+                icon = '<i class="fas fa-bolt"></i>';
               }
-
+              icon += "<h1 class='temp'>"+ Math.round(weather_data[x]["temp_f"]) +"</h1>"
+              icon = "<h3>" + hour + "</h3>" + icon;
+              icons.push(icon);
             }
 
-            else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
-              icon = '<i class="far fa-snowflake"></i>'
+            // add icons to divs (based on weather)
+            weather_one.innerHTML = icons[0]
+            weather_two.innerHTML = icons[1]
+            weather_three.innerHTML = icons[2] 
 
-              if (condition.includes('thunder')) {
-                icon = '<i class="fas fa-bolt"></i>'
-              }
-            }
 
-            else if (condition.includes("thundery")) {
-              icon = '<i class="fas fa-bolt"></i>';
-            }
-            icon += "<h1 class='temp'>"+ Math.round(weather_data[x]["temp_f"]) +"</h1>"
-            icon = "<h3>" + hour + "</h3>" + icon;
-            icons.push(icon);
+          } else {
+            console.log(`error ${request.status} ${request.statusText}`);
           }
+        };
 
-          // add icons to divs (based on weather)
-          weather_one.innerHTML = icons[0]
-          weather_two.innerHTML = icons[1]
-          weather_three.innerHTML = icons[2] 
-
-
-        } else {
-          console.log(`error ${request.status} ${request.statusText}`);
-        }
-      };
-
-    stocks = ["VOO", "DIA", "QQQ"];
-    for (var x = 0; x < stocks.length; ++x) {
-      let request_stock = new XMLHttpRequest();
-      let stock_data = {}
-      let stock = stocks[x]
-      var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[x] +"&token=c17boqv48v6se55vrcdg"
-      request_stock.open("GET", url);
-      request_stock.send();
-      request_stock.onload = () => {
-        
-        if (request_stock.status === 200) {
-          stock_data = JSON.parse(request_stock.response);
-          console.log(stock_data)
-
-          var price = stock_data["c"];
-          var last_close = stock_data["pc"]
-          var change = (price - last_close) / last_close * 100.0
-          var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + stock_data["c"];
+      stocks = ["VOO", "DIA", "QQQ"];
+      for (var x = 0; x < stocks.length; ++x) {
+        let request_stock = new XMLHttpRequest();
+        let stock_data = {}
+        let stock = stocks[x]
+        var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[x] +"&token=c17boqv48v6se55vrcdg"
+        request_stock.open("GET", url);
+        request_stock.send();
+        request_stock.onload = () => {
           
-          if (change < 0) {
-            stock_info += '<i class="down fas fa-long-arrow-alt-down"></i>';
-            stock_info += "<span class='down'>" + change.toFixed(2) + "%</span>";         
+          if (request_stock.status === 200) {
+            stock_data = JSON.parse(request_stock.response);
+            console.log(stock_data)
+
+            var price = stock_data["c"];
+            var last_close = stock_data["pc"]
+            var change = (price - last_close) / last_close * 100.0
+            var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + stock_data["c"];
+            
+            if (change < 0) {
+              stock_info += '<i class="down fas fa-long-arrow-alt-down"></i>';
+              stock_info += "<span class='down'>" + change.toFixed(2) + "%</span>";         
+            }
+            else {
+              stock_info += '<i class="up fas fa-long-arrow-alt-up"></i>'
+              stock_info += "<span class='up'>" + change.toFixed(2) + "%</span>";         
+            }
+
+            stock_info += "</span>";
+
+            document.getElementById(stock).innerHTML = stock_info;
+
+            
+          } else {
+            console.log(`error ${request_stock.status} ${request_stock.statusText}`);
           }
-          else {
-            stock_info += '<i class="up fas fa-long-arrow-alt-up"></i>'
-            stock_info += "<span class='up'>" + change.toFixed(2) + "%</span>";         
-          }
+        };
+      }
 
-          stock_info += "</span>";
-
-          document.getElementById(stock).innerHTML = stock_info;
-
-          
-        } else {
-          console.log(`error ${request_stock.status} ${request_stock.statusText}`);
-        }
-      };
+      setTimeout(weatherStocks, 5000);
     }
 
-
+    weatherStocks();
     
-
   </script>
 
 </html>
