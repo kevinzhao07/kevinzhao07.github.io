@@ -20,7 +20,6 @@ html, body {
 div#container {
   width: 100%;
 }
-
 /* BIRTHDAY FORM ENTRY SECTION */
 
 div.birthdate {
@@ -109,7 +108,7 @@ div.age_counter {
 div#age_counter {
   text-align: center;
   width: 95%;
-  height: 150px; 
+  height: 100px; 
   margin: 0 auto;
 }
 
@@ -120,20 +119,21 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 }
 
 p#age {
-  margin-top: -30px;
-  font-size: 11vw;
+  font-size: 5vw;
+  line-height: .8em;
 }
 
 p#time-now{
-  font-size: 21vw;
-  margin-top: -65px;
+  font-size: 24vw;
+  line-height: .28em;
+  margin-top: 40px;
 }
 
 p#date-now{
   font-size: 4vw;
-  color: #f6fafb;
   color: #d49c6b;
-  margin-top: -50px;
+  margin: 0;
+  line-height: 1.1em;
 }
 
 p#percent_of_day {
@@ -165,7 +165,7 @@ h1.title-age {
 
 h1.title-age-one {
   color: #d49c6b;
-  font-size: 35px;
+  font-size: 25px;
   margin: 0;
   margin-top: 15vh;
 }
@@ -174,9 +174,7 @@ h1.title-age-one {
 div#time {
   text-align: center;
   width: 90%;
-  height: 275px; 
   margin: 0 auto;
-  margin-top: 60px;
 }
 
 div.time, div.footer {
@@ -199,10 +197,10 @@ div#footer {
   clear: both;
   overflow: hidden;
   text-align: center;
-  margin-top: -2vh;
+  margin-top: 2vh;
 }
 
-div#weather {
+div#weather, div#weather-forecast {
   width: 47%;
   text-align: center;
   color: #f6fafb;
@@ -210,8 +208,12 @@ div#weather {
   margin-left: 3%;
 }
 
+div#weather-forecast {
+  margin-top: -10px;
+}
+
 div#stocks {
-  width: 42%;
+  width: 44%;
   float: left;
   color: #d49c6b;
   font-size: 4.5vw;
@@ -233,20 +235,21 @@ p.stock_name {
   float: left;
 }
 
-div#one, div#two, div#three {
+div#one, div#two, div#three, div#four, div#five, div#six {
   float: left;
+  width: 105px;
 }
 
-div#one {
+div#one, div#four {
   margin-left: 3vw;
 }
 
-div#two, div#three {
+div#two, div#three, div#five, div#six {
   margin-left: 4vw;
 }
 
 i {
-  font-size: 8vw;
+  font-size: 70px;
   color: #e6e6e6;
 }
 
@@ -276,11 +279,19 @@ span.up, span.down {
 
 h1.temp {
   font-size: 5vw;
-  margin: 5px 0px 0px 0px;
+  margin: 0px;
 }
 
 h3 {
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 5px 0px;
   font-size: 4vw;
   color: #d49c6b;
+}
+
+h3.temp_low {
+  margin: 0;
+  line-height: .6em;
+  margin-bottom: 15px;
+  color: #adadad;
+  font-size: 3.5vw;
 }
