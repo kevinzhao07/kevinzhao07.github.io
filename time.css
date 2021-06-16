@@ -111,7 +111,7 @@ div#age_counter {
   margin: 0 auto;
   position: absolute;
   top: 20px;
-  right: 85px;
+  right: 60px;
 }
 
 p#age, p#age-max, p#time-now, p#percent_of_day {
