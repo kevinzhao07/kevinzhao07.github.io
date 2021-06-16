@@ -133,6 +133,7 @@ p#date-now{
   color: #d49c6b;
   margin: 0;
   line-height: 1.1em;
+  margin-top: 10px;
 }
 
 p#percent_of_day {
@@ -196,7 +197,7 @@ div#footer {
   clear: both;
   overflow: hidden;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 17px;
 }
 
 div#weather, div#weather-forecast {
