@@ -107,7 +107,6 @@ div.age_counter {
 
 div#age_counter {
   text-align: center;
-  width: 95%;
   height: 100px; 
   margin: 0 auto;
 }
@@ -119,14 +118,14 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 }
 
 p#age {
-  font-size: 5vw;
+  font-size: 6vw;
   line-height: .8em;
 }
 
 p#time-now{
   font-size: 24vw;
   line-height: .28em;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 p#date-now{
@@ -165,9 +164,9 @@ h1.title-age {
 
 h1.title-age-one {
   color: #d49c6b;
-  font-size: 25px;
+  font-size: 35px;
   margin: 0;
-  margin-top: 15vh;
+  margin-top: 350px;
 }
 
 /* AGE STATS */
@@ -197,37 +196,52 @@ div#footer {
   clear: both;
   overflow: hidden;
   text-align: center;
-  margin-top: 2vh;
+  margin-top: 25px;
 }
 
 div#weather, div#weather-forecast {
-  width: 47%;
+  width: 48%;
   text-align: center;
   color: #f6fafb;
   float: left;
   margin-left: 3%;
 }
 
+div#weather {
+  margin-top: 10px;
+}
+
 div#weather-forecast {
   margin-top: -10px;
+  margin-left: 0%;
+  border-left: 2px solid #adadad;
+}
+
+div#misc {
+  width: 46%;
+  text-align: center;
+  color: #f6fafb;
+  float: left;
+  margin-left: 3%;
+  margin-top: 25px;
 }
 
 div#stocks {
-  width: 44%;
+  width: 42%;
   float: left;
   color: #d49c6b;
   font-size: 4.5vw;
-  height: 200px;
-  margin-top: 2vh;
-  margin-left: 2%;
+  margin-left: 3%;
+  padding-left: 3.5%;
 }
 
-div#VOO, div#DIA, div#QQQ {
+div#VOO, div#DIA, div#QQQ, div#EXTRA {
   margin: 0;
   margin-bottom: 1vh;
   text-align: justify;
   font-weight: 700;
   clear: both;
+  overflow: hidden;
 }
 
 p.stock_name {
@@ -294,4 +308,40 @@ h3.temp_low {
   margin-bottom: 15px;
   color: #adadad;
   font-size: 3.5vw;
+}
+
+img.sun {
+  width: 70px;
+}
+
+div#sunrise, div#sunset, div#chance_rain, div#wind {
+  float: left;
+  margin-right: 35px;
+  margin-left: 5px;
+}
+
+div#sunrise {
+  margin-left: 20px;
+}
+
+div#wind {
+  margin-right: 0px;
+}
+
+i.rain-wind {
+  font-size: 61px;
+}
+
+p.stats {
+  margin: 0;
+  font-size: 37px;
+  font-weight: 700;
+}
+
+span.mph {
+  font-size: 15px;
+}
+
+p.rain-wind {
+  margin-top: 5px;
 }

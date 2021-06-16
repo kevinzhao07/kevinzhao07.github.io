@@ -33,11 +33,6 @@
     </div>
 
     <div id="container">
-      <div id="age_counter" class="age_counter">
-        <h1 class="title-age-one">your current age:</h1>
-        <p id="age"></p>
-      </div>
-  
       <div id="time" class="time">
         <p id="time-now"></p>
         <p id="date-now"></p>
@@ -50,17 +45,30 @@
         <div id="two"></div>
         <div id="three"></div>
       </div>
-
-      <div id="stocks">
-        <div id="VOO"></div>
-        <div id="DIA"></div>
-        <div id="QQQ"></div>
-      </div>
-
+      
       <div id="weather-forecast">
         <div id="four"></div>
         <div id="five"></div>
         <div id="six"></div>
+      </div>
+      
+      <div id="stocks">
+        <div id="VOO"></div>
+        <div id="DIA"></div>
+        <div id="QQQ"></div>
+        <div id="EXTRA"></div>
+      </div>
+      
+      <div id="misc">
+        <div id="sunrise"></div>
+        <div id="sunset"></div>
+        <div id="chance_rain"></div>
+        <div id="wind"></div>
+      </div>
+      
+      <div id="age_counter" class="age_counter">
+        <h1 class="title-age-one">your current age:</h1>
+        <p id="age"></p>
       </div>
 
     </div>
@@ -194,6 +202,10 @@
       var weather_four = document.getElementById("four");
       var weather_five = document.getElementById("five");
       var weather_six = document.getElementById("six");
+      var sunrise = document.getElementById("sunrise");
+      var sunset = document.getElementById("sunset");
+      var chance_rain = document.getElementById("chance_rain");
+      var wind = document.getElementById("wind");
       let data = {}
       let request = new XMLHttpRequest();
         request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=48105&days=3&aqi=no&alerts=no");
@@ -210,9 +222,13 @@
             console.log(data);
             data = data["forecast"]["forecastday"]
             var weather_today = data[0]["hour"]
+            var sun_rise = data[0]["astro"]["sunrise"]
+            var sun_set = data[0]["astro"]["sunset"]
             var weather_tom = data[1]["hour"]
 
-            
+            var chance_of_rain = data[0]["day"]["daily_chance_of_rain"]
+            var wind_mph = data[0]["day"]["maxwind_mph"]
+
             for (var x = 0; x < 3; ++x) {
               var condition = data[x]["day"]["condition"]["text"].toLowerCase();
               var code = data[x]["day"]["condition"]["code"];
@@ -280,6 +296,12 @@
             weather_five.innerHTML = icons[1];
             weather_six.innerHTML = icons[2];
             icons = [];
+
+            // calculate sunrise/sunset
+            sunrise.innerHTML = '<img class="sun" src="images/sunrise.png"/><p class="stats">' + sun_rise.substring(0, 5) + "</p>";
+            sunset.innerHTML = '<img class="sun" src="images/sunset.png"/><p class="stats">' + (parseInt(sun_set.substring(0, 2)) + 12).toString() + sun_set.substring(2, 5) + "</p>";
+            chance_rain.innerHTML = '<i class="rain-wind fas fa-tint"></i><p class="stats rain-wind">' + chance_of_rain + "%</p>"
+            wind.innerHTML = '<i class="rain-wind fas fa-wind"></i><p class="stats rain-wind">' + wind_mph.toFixed(0) + "<span class='mph'>mph</span></p>"
   
   
             // calculating what hour to start at (next hour)
@@ -413,6 +435,9 @@
 
     function stonks() {
       stocks = ["VOO", "DIA", "QQQ"];
+      extra_stocks = ["AAPL", "MSFT", "AMZN", "FB", "JPM", "TSLA", "NVDA", "V", "HD", "PG", "DIS", "PYPL", "MA", "ADBE", "INTC", "CSCO", "CRM", "NFLX", "KO", "T", "WMT", "QCOM", "AXP", "GOOG", "SHOP", "IBM", "SQ", "UBER", "SNAP", "U", "LYFT"]
+      var extra = extra_stocks[Math.floor(Math.random() * extra_stocks.length)]
+      stocks.push(extra);
       for (var x = 0; x < stocks.length; ++x) {
         let request_stock = new XMLHttpRequest();
         let stock_data = {}
@@ -441,7 +466,10 @@
             }
 
             stock_info += "</span>";
-
+            
+            if (stock != "QQQ" && stock != "VOO" && stock != "DIA") {
+              stock = "EXTRA";
+            }
             document.getElementById(stock).innerHTML = stock_info;
 
             
@@ -451,7 +479,7 @@
         };
       }
 
-      setTimeout(stonks, 3500);
+      setTimeout(stonks, 5000);
     }
 
     weather();
