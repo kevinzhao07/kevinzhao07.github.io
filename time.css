@@ -166,7 +166,7 @@ h1.title-age-one {
   color: #d49c6b;
   font-size: 35px;
   margin: 0;
-  margin-top: 350px;
+  margin-top: 340px;
 }
 
 /* AGE STATS */
@@ -223,7 +223,7 @@ div#misc {
   color: #f6fafb;
   float: left;
   margin-left: 3%;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 div#stocks {
@@ -237,7 +237,6 @@ div#stocks {
 
 div#VOO, div#DIA, div#QQQ, div#EXTRA {
   margin: 0;
-  margin-bottom: 1vh;
   text-align: justify;
   font-weight: 700;
   clear: both;
@@ -317,7 +316,6 @@ img.sun {
 div#sunrise, div#sunset, div#chance_rain, div#wind {
   float: left;
   margin-right: 35px;
-  margin-left: 5px;
 }
 
 div#sunrise {
