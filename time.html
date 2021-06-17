@@ -343,6 +343,7 @@
               }
   
               else if (will_rain == 0) {
+
                 // clear (no clouds)
                 if (cloud < 30) {
                   if (day == 1) {
@@ -354,7 +355,7 @@
                 }
   
                 // partly cloudy
-                if (cloud >= 30 && cloud < 70) {
+                else if (cloud >= 30 && cloud < 70) {
                   if (day == 1) {
                     icon = '<i class="fas fa-cloud-sun"></i>'
                   }
