@@ -1,45 +1,414 @@
+<!DOCTYPE html>
 <html>
+  
   <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
-      google.charts.load('current', {packages: ['corechart', 'line']});
-      google.charts.setOnLoadCallback(drawBasic);
-
-      function drawBasic() {
-
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'X');
-        data.addColumn('number', 'Dogs');
-
-        data.addRows([
-          [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
-          [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
-          [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-          [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-          [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-          [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-          [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-          [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-          [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-          [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-          [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-          [66, 70], [67, 72], [68, 75], [69, 80]
-        ]);
-
-        var options = {
-          hAxis: {
-          },
-          vAxis: {
-          }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-
-    </script>
+    <title>age counter</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="test.css">
+    <script src="https://kit.fontawesome.com/59df0f1cf2.js" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   </head>
-  <body>
-    <div id="chart_div"></div>
+
+  <body class="bg">
+    <div id="exit-15" class="hide"><i class="exit fas fa-external-link-square-alt"></i><span class="exit_15">15</span></div>
+    <div id="exit-14" class="hide"><i class="exit fas fa-external-link-square-alt"></i><span class="exit_14">14</span></div>
+    <div id="exit-12" class="hide"><i class="exit fas fa-external-link-square-alt"></i><span class="exit_12">12</span><span class="exit_A">A</span></div>
+    <div id="home" class="hide"><i class="home fas fa-home"></i></div>
+    <div id="exit_map" class="hide" onclick="deactivateMap()"><i class="exit_map fas fa-times"></i></div>
+    <div id="map" class="map hide"></div>
+    <div id="container">
+      <div id="time">
+        <p id="time-now"></p>
+        <p id="date-now"></p>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div id="weather">
+        <div id="one"></div>
+        <div id="two"></div>
+        <div id="three"></div>
+      </div>
+      
+      <div id="weather-forecast">
+        <div id="four"></div>
+        <div id="five"></div>
+        <div id="six"></div>
+      </div>
+      
+      <div id="misc">
+        <div id="sunrise"></div>
+        <div id="sunset"></div>
+        <div id="chance_rain"></div>
+        <div id="wind"></div>
+      </div>
+      
+      <button id="activate_map" class="activate-map" onclick="activateMap()"><i class="route fas fa-route"></i></button>
+      
+    </div>
+    
+    <!-- <div id="day_percent" class="day_percent">
+      <h1 class="title-age">today is already: </h1>
+      <p id="percent_of_day"></p>
+      <p class="misc"> over. do something. </p>
+    </div> -->
+
   </body>
+
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVe4OjeaIbUfeKw0Hm6hj2Ir7kGdppQps&callback=initMap&libraries=&v=weekly"
+  async
+  ></script>
+
+  <script>
+    let map, infowindow, infoWindow_14, infoWindow_15, infoWindow_12;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: { lat: 40.767477, lng: -73.831601 },
+      });
+      const trafficLayer = new google.maps.TrafficLayer();
+      infoWindow = new google.maps.InfoWindow();
+      infoWindow_14 = new google.maps.InfoWindow();
+      infoWindow_15 = new google.maps.InfoWindow();
+      infoWindow_12 = new google.maps.InfoWindow();
+      trafficLayer.setMap(map);
+
+      const target = { lat: 40.783693, lng: -73.833291 };
+      const marker = new google.maps.Marker({
+        position: target,
+        map: map,
+      });
+
+      var origin = new google.maps.LatLng(40.750085, -73.822605);
+      var destination = new google.maps.LatLng(40.781671, -73.832132);
+  
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [origin],
+          destinations: [destination],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
+        }, callback);
+  
+      function callback(response, status) {
+        console.log(response)
+        var button = document.getElementById('activate_map')
+        var button_html = '<i class="route fas fa-route"></i>'
+        button_html += response["rows"][0]["elements"][0]["distance"]["text"]
+        button_html += "<br/>"
+        button_html += response["rows"][0]["elements"][0]["duration"]["text"]
+        button.innerHTML = button_html;
+      }
+    }
+
+  </script>
+
+  <script>
+
+    function activateMap() {
+      var map = document.getElementById("map");
+      map.classList.remove("hide");
+      var container = document.getElementById("container");
+      container.classList.add("hide");
+      var footer = document.getElementById("footer");
+      footer.classList.add("hide");
+      var exit_14 = document.getElementById("exit-14");
+      exit_14.classList.remove("hide");
+      var exit_15 = document.getElementById("exit-15");
+      exit_15.classList.remove("hide");
+      var exit_12 = document.getElementById("exit-12");
+      exit_12.classList.remove("hide");
+      var home = document.getElementById("home");
+      home.classList.remove("hide");
+      var exit_map = document.getElementById("exit_map");
+      exit_map.classList.remove("hide");
+      initMap();
+    }
+
+    function deactivateMap() {
+      var map = document.getElementById("map");
+      map.classList.add("hide");
+      var container = document.getElementById("container");
+      container.classList.remove("hide");
+      var footer = document.getElementById("footer");
+      footer.classList.remove("hide");
+      var exit_14 = document.getElementById("exit-14");
+      exit_14.classList.add("hide");
+      var exit_15 = document.getElementById("exit-15");
+      exit_15.classList.add("hide");
+      var exit_12 = document.getElementById("exit-12");
+      exit_12.classList.add("hide");
+      var home = document.getElementById("home");
+      home.classList.add("hide");
+      var exit_map = document.getElementById("exit_map");
+      exit_map.classList.add("hide");}
+    
+    function run() {
+      var obj_time = document.getElementById("time-now");
+      var obj_date = document.getElementById("date-now");
+
+      var today = new Date();
+      var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+      var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+      var time = today_hours + ":" + today_minutes;
+      obj_time.innerHTML = time;
+
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var today_month = months[today.getMonth()];
+      var today_date = today.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+      var today_year = today.getFullYear();
+      var today_day = days[today.getDay()];
+      var date = today_day + ", " + today_month + " " + today_date + ", " + today_year
+      obj_date.innerHTML = date;
+    }
+    run();
+
+    function weather() {
+      var weather_one = document.getElementById("one");
+      var weather_two = document.getElementById("two");
+      var weather_three = document.getElementById("three");
+      var weather_four = document.getElementById("four");
+      var weather_five = document.getElementById("five");
+      var weather_six = document.getElementById("six");
+      var sunrise = document.getElementById("sunrise");
+      var sunset = document.getElementById("sunset");
+      var chance_rain = document.getElementById("chance_rain");
+      var wind = document.getElementById("wind");
+      let data = {}
+      let request = new XMLHttpRequest();
+      request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=48105&days=3&aqi=no&alerts=no");
+      request.send();
+      request.onload = () => {
+
+        // do all the weather updating here
+        var icons = []
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var today = new Date();
+        var day = today.getDay();
+        if (request.status === 200) {
+          data = JSON.parse(request.response);
+          console.log(data);
+          data = data["forecast"]["forecastday"]
+          var weather_today = data[0]["hour"]
+          var sun_rise = data[0]["astro"]["sunrise"]
+          var sun_set = data[0]["astro"]["sunset"]
+          var weather_tom = data[1]["hour"]
+
+          var chance_of_rain = data[0]["day"]["daily_chance_of_rain"]
+          var wind_mph = data[0]["day"]["maxwind_mph"]
+
+          for (var x = 0; x < 3; ++x) {
+            var condition = data[x]["day"]["condition"]["text"].toLowerCase();
+            var code = data[x]["day"]["condition"]["code"];
+            var high_today = data[x]["day"]["maxtemp_f"]
+            var low_today = data[x]["day"]["mintemp_f"]
+            var icon = "";
+
+            if (condition == "sunny") {
+              icon = '<i class="fas fa-sun"></i>'
+            }
+
+            else if (condition == "clear") {
+              icon = '<i class="fas fa-moon"></i>'
+            }
+
+            else if (condition == "partly cloudy") {
+              icon = '<i class="fas fa-cloud-sun"></i>'
+            }
+
+            else if (condition == "cloudy" || condition == "overcast") {
+              icon = '<i class="fas fa-cloud"></i>'
+            }
+
+            else if (code == 1030 || code == 1135 || code == 1147) {
+              icon = '<i class="fas fa-smog"></i>'
+            }
+
+            else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+              
+              icon = '<i class="fas fa-cloud-rain"></i>';
+              
+              if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
+                icon = '<i class="fas fa-cloud-showers-heavy"></i>'
+              }
+
+              if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+                icon = '<i class="far fa-snowflake"></i>'
+              }
+
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+
+            }
+
+            else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              icon = '<i class="far fa-snowflake"></i>'
+
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+            }
+
+            else if (condition.includes("thundery")) {
+              icon = '<i class="fas fa-bolt"></i>';
+            }
+
+            icon += "<h1 class='temp'>"+ Math.round(high_today) +"</h1><h3 class='temp_low'>"+ Math.round(low_today) +"</h3>";
+            icon = "<h3 class='temp-date'>" + days[day++].substring(0, 3) + "</h3>" + icon
+            day = day % 7;
+            icons.push(icon);
+          }
+
+          weather_four.innerHTML = icons[0];
+          weather_five.innerHTML = icons[1];
+          weather_six.innerHTML = icons[2];
+          icons = [];
+
+          // calculate sunrise/sunset
+          sunrise.innerHTML = '<img class="sun" src="images/sunrise.png"/><p class="stats">' + sun_rise.substring(0, 5) + "</p>";
+          sunset.innerHTML = '<img class="sun" src="images/sunset.png"/><p class="stats">' + (parseInt(sun_set.substring(0, 2)) + 12).toString() + sun_set.substring(2, 5) + "</p>";
+          chance_rain.innerHTML = '<i class="rain-wind fas fa-tint"></i><p class="stats rain-wind">' + chance_of_rain + "%</p>"
+          wind.innerHTML = '<i class="rain-wind fas fa-wind"></i><p class="stats rain-wind">' + wind_mph.toFixed(0) + "<span class='mph'>mph</span></p>"
+
+
+          // calculating what hour to start at (next hour)
+          var now = Date.now() / 1000;
+          var start_weather = 24;
+          for (var x = 0; x < weather_today.length; ++x) {
+            if (now < weather_today[x]["time_epoch"]) {
+              start_weather = x;
+              break;
+            }
+          }
+
+          for (var x = 0; x < weather_tom.length; ++x) {
+            weather_today.push(weather_tom[x]);
+          }
+
+          // finding weather for next 3 hours
+          weather_data = []
+          start_weather--;
+          weather_data.push(weather_today[start_weather++])
+          weather_data.push(weather_today[start_weather++])
+          weather_data.push(weather_today[start_weather++])
+
+          console.log(weather_data);
+          for (var x = 0; x < weather_data.length; ++x) {
+            condition = weather_data[x]["condition"]["text"].toLowerCase();
+            code = weather_data[x]["condition"]["code"];
+            var day = weather_data[x]["is_day"];
+            var hour = weather_data[x]["time"].substring(11, 13)
+            var will_rain = weather_data[x]["will_it_rain"];
+            var cloud = weather_data[x]["cloud"]
+            icon = "";
+
+            if (condition == "sunny") {
+              icon = '<i class="fas fa-sun"></i>'
+            }
+
+            else if (condition == "clear") {
+              icon = '<i class="fas fa-moon"></i>'
+            }
+
+            else if (will_rain == 0) {
+
+              // clear (no clouds)
+              if (cloud < 30) {
+                if (day == 1) {
+                  icon = '<i class="fas fa-sun"></i>'
+                }
+                else {
+                  icon = '<i class="fas fa-moon"></i>'
+                }
+              }
+
+              // partly cloudy
+              else if (cloud >= 30 && cloud < 70) {
+                if (day == 1) {
+                  icon = '<i class="fas fa-cloud-sun"></i>'
+                }
+                else {
+                  icon = '<i class="fas fa-cloud-moon"></i>'
+                }
+              }
+
+              else {
+                icon = '<i class="fas fa-cloud"></i>'
+              }
+            }
+
+            else if (condition == "partly cloudy") {
+              if (day == 0) {
+                icon = '<i class="fas fa-cloud-moon"></i>'
+              }
+              else {
+                icon = '<i class="fas fa-cloud-sun"></i>'
+              }
+            }
+
+            else if (condition == "cloudy" || condition == "overcast") {
+              icon = '<i class="fas fa-cloud"></i>'
+            }
+
+            else if (code == 1030 || code == 1135 || code == 1147) {
+              icon = '<i class="fas fa-smog"></i>'
+            }
+
+            else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+              
+              icon = '<i class="fas fa-cloud-rain"></i>';
+              
+              if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
+                icon = '<i class="fas fa-cloud-showers-heavy"></i>'
+              }
+
+              if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+                icon = '<i class="far fa-snowflake"></i>'
+              }
+
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+
+            }
+
+            else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              icon = '<i class="far fa-snowflake"></i>'
+
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+            }
+
+            else if (condition.includes("thundery")) {
+              icon = '<i class="fas fa-bolt"></i>';
+            }
+            icon += "<h1 class='temp'>"+ Math.round(weather_data[x]["temp_f"]) +"</h1>"
+            icon = "<h3>" + hour + "</h3>" + icon;
+            icons.push(icon);
+          }
+
+          // add icons to divs (based on weather)
+          weather_one.innerHTML = icons[0]
+          weather_two.innerHTML = icons[1]
+          weather_three.innerHTML = icons[2] 
+
+        } else {
+          console.log(`error ${request.status} ${request.statusText}`);
+        }
+      };
+
+      setTimeout(weather, 60000)
+    }
+    weather();
+  </script>
+  
+  
+
+
 </html>

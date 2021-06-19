@@ -1,0 +1,486 @@
+@font-face { font-family: Sans; src: url('Source_Sans_Pro/SourceSansPro-Regular.ttf'); } 
+
+/* ALL */
+* {
+  font-family: Sans;
+  /* border: 1px solid red; */
+}
+
+body.bg {
+  background-color:#252b31;
+  margin: 0;
+  /* background-image: url('images/starry.jpg');
+  background-position: -1vh -50vh ; */
+}
+
+html, body {
+  height: 100%;
+}
+
+div#container {
+  width: 100%;
+}
+/* BIRTHDAY FORM ENTRY SECTION */
+
+div.birthdate {
+  display: none;
+}
+
+div.header {
+  text-align: center;
+}
+
+img.cake {
+  width: 200px;
+  margin-top: 2%;
+}
+
+h1.title, label {
+  color: #d49c6b;
+}
+
+div.content {
+  text-align: center;
+}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+label {
+  font-size: 24px;
+}
+
+input, label {
+  display: block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance:textfield; /* Firefox */
+}
+
+input.input-date {
+  width: 100px;
+  font-size: 40px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  color: #252b31;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background-color: #c1c8c7;
+  text-align: center;
+}
+
+input:hover, input:active, input:focus {
+  border: 0;
+  border-width:0px;
+  outline: 0;
+}
+
+button.submit {
+  background-color: #252b31;
+  border: none;
+  border-radius: 5px;
+  color: #d49c6b;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+p#error {
+  color: #f6fafb;
+}
+
+/* AGE SECTION */
+div.age_counter {
+  display: none;
+}
+
+div#age_counter {
+  text-align: right;
+  height: 100px; 
+  margin: 0 auto;
+  position: absolute;
+  top: 20px;
+  right: 55px;
+}
+
+p#age, p#age-max, p#time-now, p#percent_of_day {
+  color: #f6fafb;
+  font-size: 13vw;
+  margin: 0px;
+}
+
+p#age {
+  font-size: 3.5vw;
+  font-weight: bold;
+  line-height: .8em;
+}
+
+p#time-now{
+  font-size: 20vw;
+  line-height: .68em;
+  margin-top: 30px;
+}
+
+p#date-now{
+  font-size: 4.5vw;
+  color: #d49c6b;
+  margin: 0;
+  line-height: 1.1em;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+p#percent_of_day {
+  font-size: 8vw;
+}
+
+p#age-max {
+  font-size: 7vw;
+}
+
+p#out-of {
+  color: #f6fafb;
+  font-size: 2.5vw;
+  margin: -15px 0px 0px 0px;
+}
+
+p.misc {
+  color: #f6fafb;
+  font-size: 20px;
+  margin: 0;
+}
+
+h1.title-age {
+  color: #d49c6b;
+  font-size: 35px;
+  margin: 0;
+  margin-top: -55px;
+}
+
+h1.title-age-one {
+  color: #d49c6b;
+  font-size: 20px;
+  margin: 0;
+}
+
+/* AGE STATS */
+div#time {
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+div.time, div.footer {
+  display: none;
+}
+
+span.seconds {
+  font-size: 7.5vw;
+}
+
+span.price {
+  float: right;
+  color: #f6fafb;
+}
+
+/* WEATHER STATS */
+div#footer {
+  width: 95%;
+  margin: 0 auto;
+  clear: both;
+  overflow: hidden;
+  text-align: center;
+  margin-top: 17px;
+}
+
+div#weather, div#weather-forecast {
+  width: 48%;
+  text-align: center;
+  color: #f6fafb;
+  float: left;
+  margin-left: 3%;
+}
+
+div#weather {
+  margin-top: 10px;
+}
+
+div#weather-forecast {
+  margin-top: -10px;
+  margin-left: 0%;
+  border-left: 2px solid #adadad;
+}
+
+div#misc {
+  width: 46%;
+  text-align: center;
+  color: #f6fafb;
+  float: left;
+  margin-left: 55px;
+  margin-top: 10px;
+}
+
+div#stocks {
+  width: 42%;
+  float: left;
+  color: #d49c6b;
+  font-size: 4.5vw;
+  margin-left: 3%;
+  padding-left: 3.5%;
+}
+
+div#VOO, div#DIA, div#QQQ, div#EXTRA {
+  margin: 0;
+  text-align: justify;
+  font-weight: 700;
+  clear: both;
+  overflow: hidden;
+}
+
+div#DIA, div#QQQ, div#EXTRA {
+  margin-top: -12px;
+}
+
+p.stock_name {
+  margin: 0;
+  float: left;
+}
+
+div#one, div#two, div#three, div#four, div#five, div#six {
+  float: left;
+  width: 105px;
+}
+
+div#one, div#four {
+  margin-left: 3vw;
+}
+
+div#two, div#three, div#five, div#six {
+  margin-left: 4vw;
+}
+
+i {
+  font-size: 70px;
+  color: #e6e6e6;
+}
+
+i.reg {
+  font-size: 4vw;
+  color: #f6fafb;
+}
+
+i.up, i.down {
+  margin-left: 1vw;
+}
+
+.up {
+  font-size: 3.5vw;
+  color: #84bd77;
+}
+
+.down {
+  font-size: 3.5vw;
+  color: #b57272;
+}
+
+span.up, span.down {
+  font-size: 3.5vw;
+  margin-left: 0.3vw;
+}
+
+h1.temp {
+  font-size: 5vw;
+  margin: 0px;
+}
+
+h3 {
+  margin: 0px 0px 5px 0px;
+  font-size: 4vw;
+  color: #d49c6b;
+}
+
+h3.temp_low {
+  margin: 0;
+  line-height: .6em;
+  margin-bottom: 15px;
+  color: #adadad;
+  font-size: 3.5vw;
+}
+
+img.sun {
+  width: 70px;
+}
+
+div#sunrise, div#sunset, div#chance_rain, div#wind {
+  float: left;
+  margin-right: 20px;
+}
+
+div#sunrise {
+  margin-left: 25px;
+}
+
+div#wind {
+  margin-right: 0px;
+}
+
+i.rain-wind {
+  font-size: 61px;
+}
+
+p.stats {
+  margin: 0;
+  font-size: 37px;
+  font-weight: 700;
+}
+
+span.mph {
+  font-size: 15px;
+}
+
+p.rain-wind {
+  margin-top: 5px;
+}
+
+#map {
+  height: 100%;
+}
+
+/* .map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+} */
+
+.hide {
+  display: none;
+}
+
+#exit-15 {
+  position: absolute;
+  z-index: 100;
+  top: 200px;
+  left: 585px;
+  color: #f6fafb;
+  background-color: #ededed;
+  height: 55px;
+}
+
+#exit-14 {
+  position: absolute;
+  z-index: 100;
+  top: 395px;
+  left: 445px;
+  color: #f6fafb;
+  background-color: #ededed;
+  height: 55px;
+}
+
+#exit-12 {
+  position: absolute;
+  z-index: 100;
+  top: 635px;
+  left: 395px;
+  color: #f6fafb;
+  background-color: #ededed;
+  height: 60px;
+}
+
+#home {
+  position: absolute;
+  z-index: 100;
+  top: 635px;
+  left: 605px;
+}
+
+#exit_map {
+  position: absolute;
+  z-index: 100;
+  bottom: 15px;
+  left: 25px;
+}
+
+i.exit {
+  color: #278a7c;
+}
+
+span.exit_15 {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  z-index: 101;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+span.exit_14 {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  z-index: 101;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+span.exit_12 {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  z-index: 101;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+span.exit_A {
+  position: absolute;
+  bottom: -5px;
+  right: 8px;
+  z-index: 101;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+i.home {
+  color: #4684b0;
+  font-size: 35px;
+}
+
+i.exit_map {
+  color: #d45c4a;
+}
+
+button.activate-map {
+  background-color: #d49c6b;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 10px;
+  border-radius: 5px;
+  width: 210px;
+  padding-left: 20px;
+  font-size: 27px;
+  font-weight: bold;
+  color: #252b31;
+  margin-top: 20px;
+}
+
+i.route {
+  color: #252b31;
+  float: left;
+}
+
+p.miles {
+  line-height: 0em;
+  margin: 0 !important;
+}
