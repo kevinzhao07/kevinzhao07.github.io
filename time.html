@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div id="footer">
+    <div id="footer" class="footer">
       <div id="weather">
         <div id="one"></div>
         <div id="two"></div>
@@ -53,10 +53,8 @@
       </div>
       
       <div id="stocks">
-        <div id="VOO"></div>
+        <div id="STOCK"></div>
         <div id="chart_div"></div>
-        <div id="DIA"></div>
-        <div id="QQQ"></div>
         <div id="EXTRA"></div>
       </div>
       
@@ -82,7 +80,36 @@
 
   </body>
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   <script>
+    let previous_close = [];
+    stocks = ["VOO", "DIA", "QQQ"];
+    for (var x = 0; x < stocks.length; ++x) {
+      let request_stock = new XMLHttpRequest();
+      let stock_data = {}
+      let stock = stocks[x]
+      var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[x] +"&token=c17boqv48v6se55vrcdg"
+      request_stock.open("GET", url);
+      request_stock.send();
+      request_stock.onload = () => {
+        
+        if (request_stock.status === 200) {
+          stock_data = JSON.parse(request_stock.response);
+          var price = stock_data["c"].toFixed(2);
+          var last_close = stock_data["pc"].toFixed(2);
+          var change = (price - last_close) / last_close * 100.0
+
+          if (stock == "VOO" || stock == "DIA" || stock == "QQQ") {
+            previous_close.push([stock, last_close, change]);
+          }
+
+        } else {
+          console.log(`error ${request_stock.status} ${request_stock.statusText}`);
+        }
+      };
+    }
+
     function calculate_age() {
       // get constants from user input
       var month = document.getElementById("month").value;
@@ -434,140 +461,219 @@
         setTimeout(weather, 60000)
     }
 
+    let iteration = 0;
     function stonks() {
+      var now = new Date();
+      var time_now = parseInt(now.getTime() / 1000) - 4*3600;
+      if (now.getDay() == 0) {
+        time_now -= 86400*2;
+      }
+      else if (now.getDay() == 6) {
+        time_now -= 86400;
+      }
+      var start_time = time_now - time_now % 86400 + 3600*13 + 1800
+      time_now = time_now - time_now % 300
+      if (now.getDay() == 0 || now.getDay() == 6) {
+        time_now = start_time + 3600*10 + 1800
+      }
+
       stocks = ["VOO", "DIA", "QQQ"];
       extra_stocks = ["AAPL", "MSFT", "FB", "JPM", "TSLA", "NVDA", "V", "HD", "PG", "DIS", "PYPL", "MA", "ADBE", "INTC", "CSCO", "CRM", "NFLX", "KO", "T", "WMT", "QCOM", "AXP", "IBM", "SQ", "UBER", "SNAP", "U", "LYFT", "TWTR", "ETSY", "NOW", "WU", "BLK", "UA", "EXPE", "WMT"]
       var extra = extra_stocks[Math.floor(Math.random() * extra_stocks.length)]
       stocks.push(extra);
-      for (var x = 0; x < stocks.length; ++x) {
-        let request_stock = new XMLHttpRequest();
-        let stock_data = {}
-        let stock = stocks[x]
-        var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[x] +"&token=c17boqv48v6se55vrcdg"
-        request_stock.open("GET", url);
-        request_stock.send();
-        request_stock.onload = () => {
-          
-          if (request_stock.status === 200) {
-            stock_data = JSON.parse(request_stock.response);
+      let request_stock = new XMLHttpRequest();
+      let stock_data = {}
+      var stock = stocks[iteration]
+      console.log(start_time)
+      var url = `https://finnhub.io/api/v1/stock/candle?symbol=${stock}&resolution=5&from=${start_time}&to=${time_now}&token=c17boqv48v6se55vrcdg`
+      request_stock.open("GET", url);
+      request_stock.send();
+      request_stock.onload = () => {
+        
+        if (request_stock.status === 200) {
+          stock_data = JSON.parse(request_stock.response);
+          var price = stock_data["c"][stock_data["c"].length - 1].toFixed(2);
+          var prices_stock = stock_data["c"]
+          var last_close = 0;
 
-            var price = stock_data["c"].toFixed(2);
-            var last_close = stock_data["pc"]
-            var change = (price - last_close) / last_close * 100.0
-            var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + stock_data["c"].toFixed(2);
-            
+          if (previous_close[0][0] == stock) {
+            last_close = previous_close[0][1];
+          }
+          else if (previous_close[1][0] == stock) {
+            last_close = previous_close[1][1];
+          }
+          else {
+            last_close = previous_close[2][1];
+          }
+
+          var change = (price - last_close) / last_close * 100.0
+          var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + price;
+          
+          if (change < 0) {
+            stock_info += '<i class="down fas fa-long-arrow-alt-down"></i>';
+            stock_info += "<span class='down'>" + (change * -1).toFixed(2) + "%</span>";         
+          }
+          else {
+            stock_info += '<i class="up fas fa-long-arrow-alt-up"></i>'
+            stock_info += "<span class='up'>" + change.toFixed(2) + "%</span>";         
+          }
+
+          stock_info += "</span>";
+          
+          var stock_pc = 0;
+          var stock_change = 0;
+          if (previous_close[0][0] == stock) {
+            stock_pc = previous_close[0][1];
+            stock_change = previous_close[0][2]
+          }
+          else if (previous_close[1][0] == stock) {
+            stock_pc = previous_close[1][1];
+            stock_change = previous_close[1][2]
+          }
+          else {
+            stock_pc = previous_close[2][1];
+            stock_change = previous_close[2][2]
+          }
+          
+          if (stock != "QQQ" && stock != "VOO" && stock != "DIA") {
+            stock = "EXTRA";
+          }
+          else {
+            stock = "STOCK";
+          }
+          document.getElementById(stock).innerHTML = stock_info;
+
+
+          stock_data = JSON.parse(request_stock.response);
+          var stock_prices = []
+          for (var x = 0; x < stock_data['c'].length; ++x) {
+            var time = stock_data['t'][x];
+            var hours = time % 86400 / 3600 - 4
+            stock_prices.push([hours, stock_data['c'][x], parseFloat(stock_pc)])
+          }
+          stock_prices.push([20, stock_data['c'][stock_data['c'].length - 1], parseFloat(stock_pc)])
+
+          google.charts.load('current', {packages: ['corechart', 'line']});
+          google.charts.setOnLoadCallback(drawBasic);
+      
+          function drawBasic() {
+      
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'X');
+            data.addColumn('number', 'Price');
+            data.addColumn('number', 'Previous Close');
+      
+            data.addRows(stock_prices);
+
+            var ticks = [];
+            var high = 0;
+            var low = 1000000;
+            for (var x = 0; x < prices_stock.length; ++x) {
+              if (prices_stock[x] < low) {low = prices_stock[x]}
+              if (prices_stock[x] > high) {high = prices_stock[x]}
+            }
+            console.log(low, high, change)
+
             if (change < 0) {
-              change *= -1;
-              stock_info += '<i class="down fas fa-long-arrow-alt-down"></i>';
-              stock_info += "<span class='down'>" + change.toFixed(2) + "%</span>";         
+              high = Math.ceil(stock_pc) + 1
+              low = Math.floor(low) - 1
             }
             else {
-              stock_info += '<i class="up fas fa-long-arrow-alt-up"></i>'
-              stock_info += "<span class='up'>" + change.toFixed(2) + "%</span>";         
+              low = Math.floor(stock_pc) - 1
+              high = Math.ceil(high) + 1
             }
+            console.log(low, high)
 
-            stock_info += "</span>";
-            
-            if (stock != "QQQ" && stock != "VOO" && stock != "DIA") {
-              stock = "EXTRA";
+            var increment = 0.25;
+            while (true) {
+              var low_temp = low;
+
+              while (low < high) {
+                ticks.push(low.toFixed(2));
+                low += increment;
+              } 
+
+              if (ticks.length == 5) {
+                break;
+              }
+
+              else {
+                low = low_temp;
+                ticks = [];
+              }
+
+              increment += 0.25;
             }
-            document.getElementById(stock).innerHTML = stock_info;
+            ticks.push(low)
 
-            
-          } else {
-            console.log(`error ${request_stock.status} ${request_stock.statusText}`);
+            var options = {
+              'width': 430, 
+              'height': 250, 
+              colors: ['#6cf542', '#c7c7c7'],
+              backgroundColor: '#252b31',
+              series: {
+                1: { lineDashStyle: [6, 6]},
+              },
+              lineWidth: 4,
+              legend: {position: "none"},
+              vAxis: {
+                gridlines: {
+                  color: 'transparent',
+                  count: 2,
+                },
+                minorGridlines: {
+                  color: 'transparent',
+                },
+                ticks: ticks,
+                textStyle: {
+                  color: "#e3e3e3",
+                  fontSize: 13,
+                },
+              },
+              hAxis: {
+                gridlines: {
+                  color: 'transparent'
+                },
+                textStyle: {
+                  color: "#e3e3e3",
+                  fontSize: 13,
+                },
+                ticks: [10, 12, 14, 16, 18, 20],
+              },
+              'chartArea': {'width': '80%', 'height': '75%'},
+            };
+
+            if (stock_change < 0) {
+              options["colors"] = ['#de7171', '#c7c7c7'];
+            }
+      
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            // change to :00
+            var axis = document.getElementsByTagName("text")
+            console.log(axis)
+            axis[0].innerHTML = "10:00"
+            axis[1].innerHTML = "12:00"
+            axis[2].innerHTML = "14:00"
+            axis[3].innerHTML = "16:00"
+            axis[4].innerHTML = "18:00"
+            axis[5].innerHTML = "20:00"
           }
-        };
-      }
 
-      setTimeout(stonks, 5000);
+        } else {
+          console.log(`error ${request_stock.status} ${request_stock.statusText}`);
+        }
+      };
+      
+      iteration++;
+      iteration = iteration % 3;
+      setTimeout(stonks, 15000);
     }
 
     weather();
     stonks();
-    document.cookie = "username=John Doe";
-
     
-  </script>
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-  <script>
-    var now = new Date();
-    var time_now = parseInt(now.getTime() / 1000);
-    if (now.getDay() == 0) {
-      time_now -= 86400*2;
-    }
-    else if (now.getDay() == 6) {
-      time_now -= 86400;
-    }
-    var start_time = time_now - time_now % 86400 + 3600*13 + 1800
-    time_now = time_now - time_now % 300
-    if (now.getDay() == 0 || now.getDay() == 6) {
-      time_now = start_time + 3600*10 + 1800
-    }
-
-    let request_stock = new XMLHttpRequest();
-    let stock_data = {}
-    stocks = ["VOO", "DIA", "QQQ"];
-    var url = `https://finnhub.io/api/v1/stock/candle?symbol=${stocks[0]}&resolution=5&from=${start_time}&to=${time_now}&token=c17boqv48v6se55vrcdg`
-    request_stock.open("GET", url);
-    request_stock.send();
-    request_stock.onload = () => {
-      
-      if (request_stock.status === 200) {
-        stock_data = JSON.parse(request_stock.response);
-        console.log(stock_data)
-        let stock_prices = []
-        for (var x = 0; x < stock_data['c'].length; ++x) {
-          var time = stock_data['t'][x];
-          var hours = time % 86400 / 3600 - 4
-          stock_prices.push([hours, stock_data['c'][x]])
-        }
-        console.log(stock_prices)
-
-        google.charts.load('current', {packages: ['corechart', 'line']});
-        google.charts.setOnLoadCallback(drawBasic);
-
-        function drawBasic() {
-
-          var data = new google.visualization.DataTable();
-          data.addColumn('number', 'X');
-          data.addColumn('number', 'Price');
-
-          data.addRows(stock_prices);
-
-          var options = {
-            'width': 600, 
-            'height': 400, 
-            legend: {position: "none"},
-            vAxis: {
-              gridlines: {
-                color: 'transparent',
-                count: 2,
-              },
-              minorGridlines: {
-                color: 'transparent',
-              }
-            },
-            hAxis: {
-              gridlines: {
-                color: 'transparent'
-              },
-              ticks: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-            },
-            backgroundColor: '#252b31'
-          };
-
-          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-        }
-        
-      } else {
-        console.log(`error ${request_stock.status} ${request_stock.statusText}`);
-      }
-    };
-
   </script>
 
 </html>

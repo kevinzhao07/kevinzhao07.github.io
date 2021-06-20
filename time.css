@@ -240,7 +240,7 @@ div#stocks {
   padding-left: 3.5%;
 }
 
-div#VOO, div#DIA, div#QQQ, div#EXTRA {
+div#STOCK, div#EXTRA {
   margin: 0;
   text-align: justify;
   font-weight: 700;
@@ -248,7 +248,7 @@ div#VOO, div#DIA, div#QQQ, div#EXTRA {
   overflow: hidden;
 }
 
-div#DIA, div#QQQ, div#EXTRA {
+div#EXTRA {
   margin-top: -12px;
 }
 
@@ -351,4 +351,10 @@ span.mph {
 
 p.rain-wind {
   margin-top: 5px;
+}
+
+div#chart_div {
+  position: relative;
+  margin-top: -20px;
+  z-index: -1;
 }
