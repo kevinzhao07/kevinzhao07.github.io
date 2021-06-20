@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div id="footer" class="footer">
+    <div id="footer">
       <div id="stocks">
         <div id="STOCK"></div>
         <div id="chart_div"></div>
@@ -531,7 +531,7 @@
             }
   
             var change = (price - last_close) / last_close * 100.0
-            var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + price;
+            var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + price + "</span>";
             
             if (change < 0) {
               stock_info += '<div id="info"><i class="down fas fa-long-arrow-alt-down"></i>';
@@ -549,7 +549,7 @@
             for (var x = 0; x < previous_close.length; ++x) {
               if (previous_close[x][0] == stock) {
                 stock_pc = parseFloat(previous_close[x][1]);
-                stock_change = previous_close[x][2]
+                stock_change = parseFloat(previous_close[x][2])
               }
               if (x == previous_close.length - 1 && stock_pc == 0) {
                 iteration++;
@@ -674,6 +674,7 @@
                 'chartArea': {'width': '75%', 'height': '75%'},
               };
   
+              console.log(stock_change)
               if (stock_change < 0) {
                 options["colors"] = ['#de7171', '#c7c7c7'];
               }
