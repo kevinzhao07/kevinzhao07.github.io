@@ -598,11 +598,17 @@
                 if (high < Math.ceil(stock_pc) + 1) {
                   high = Math.ceil(stock_pc) + 1
                 }
+                else {
+                  high = Math.ceil(high) + 1;
+                }
                 low = Math.floor(low) - 1
               }
               else {
                 if (low > Math.floor(stock_pc) - 1) {
                   low = Math.floor(stock_pc) - 1
+                }
+                else {
+                  low = Math.floor(low) - 1;
                 }
                 high = Math.ceil(high) + 1
               }
