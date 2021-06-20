@@ -111,7 +111,7 @@ div#age_counter {
   margin: 0 auto;
   position: absolute;
   top: 20px;
-  right: 55px;
+  right: 80px;
 }
 
 p#age, p#age-max, p#time-now, p#percent_of_day {
@@ -209,7 +209,7 @@ div#weather, div#weather-forecast {
   text-align: center;
   color: #f6fafb;
   float: left;
-  margin-left: 3%;
+  margin-left: 0%;
 }
 
 div#weather {
@@ -226,7 +226,7 @@ div#misc {
   width: 46%;
   text-align: center;
   color: #f6fafb;
-  float: left;
+  float: right;
   margin-left: 3%;
   margin-top: 10px;
 }
@@ -236,7 +236,7 @@ div#stocks {
   float: left;
   color: #d49c6b;
   font-size: 4.5vw;
-  margin-left: 3%;
+  margin-right: 3%;
   padding-left: 3.5%;
 }
 
@@ -355,6 +355,7 @@ p.rain-wind {
 
 div#chart_div {
   position: relative;
-  margin-top: -20px;
+  margin-top: -5px;
+  margin-left: -20px;
   z-index: -1;
 }

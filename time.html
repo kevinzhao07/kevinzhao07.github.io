@@ -39,11 +39,11 @@
       </div>
     </div>
 
-    <div id="footer" class="footer">
-      <div id="weather">
-        <div id="one"></div>
-        <div id="two"></div>
-        <div id="three"></div>
+    <div id="footer">
+      <div id="stocks">
+        <div id="STOCK"></div>
+        <div id="chart_div"></div>
+        <div id="EXTRA"></div>
       </div>
       
       <div id="weather-forecast">
@@ -52,10 +52,10 @@
         <div id="six"></div>
       </div>
       
-      <div id="stocks">
-        <div id="STOCK"></div>
-        <div id="chart_div"></div>
-        <div id="EXTRA"></div>
+      <div id="weather">
+        <div id="one"></div>
+        <div id="two"></div>
+        <div id="three"></div>
       </div>
       
       <div id="misc">
@@ -584,7 +584,7 @@
             }
             console.log(low, high)
 
-            var increment = 0.25;
+            var increment = 0.5;
             while (true) {
               var low_temp = low;
 
@@ -593,7 +593,7 @@
                 low += increment;
               } 
 
-              if (ticks.length == 5) {
+              if (ticks.length == 4) {
                 break;
               }
 
@@ -602,13 +602,13 @@
                 ticks = [];
               }
 
-              increment += 0.25;
+              increment += 0.5;
             }
             ticks.push(low)
 
             var options = {
-              'width': 430, 
-              'height': 250, 
+              'width': 460, 
+              'height': 275, 
               colors: ['#6cf542', '#c7c7c7'],
               backgroundColor: '#252b31',
               series: {
@@ -618,7 +618,7 @@
               legend: {position: "none"},
               vAxis: {
                 gridlines: {
-                  color: 'transparent',
+                  color: '#3a414a',
                   count: 2,
                 },
                 minorGridlines: {
@@ -627,7 +627,7 @@
                 ticks: ticks,
                 textStyle: {
                   color: "#e3e3e3",
-                  fontSize: 13,
+                  fontSize: 17,
                 },
               },
               hAxis: {
@@ -636,11 +636,11 @@
                 },
                 textStyle: {
                   color: "#e3e3e3",
-                  fontSize: 13,
+                  fontSize: 17,
                 },
                 ticks: [10, 12, 14, 16, 18, 20],
               },
-              'chartArea': {'width': '80%', 'height': '75%'},
+              'chartArea': {'width': '75%', 'height': '75%'},
             };
 
             if (stock_change < 0) {
@@ -668,7 +668,7 @@
       
       iteration++;
       iteration = iteration % 3;
-      setTimeout(stonks, 15000);
+      setTimeout(stonks, 4000);
     }
 
     weather();

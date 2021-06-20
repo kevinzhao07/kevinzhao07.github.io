@@ -111,6 +111,7 @@
     function activateMap() {
       var map = document.getElementById("map");
       map.classList.remove("hide");
+      map.classList.add("elementToFadeInAndOut");
       var container = document.getElementById("container");
       container.classList.add("hide");
       var footer = document.getElementById("footer");
@@ -125,6 +126,7 @@
       home.classList.remove("hide");
       var exit_map = document.getElementById("exit_map");
       exit_map.classList.remove("hide");
+      
       initMap();
     }
 
