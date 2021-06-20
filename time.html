@@ -84,35 +84,35 @@
 
   <script>
 
-    let previous_close = [];
-    let prev_iteration = 0;
-    function get_close_price() {
-      var stocks = ["VOO", "DIA", "QQQ", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AEP", "ALGN", "ALXN", "AMAT", "AMD", "AMGN", "AMZN", "ANSS", "ASML", "ATVI", "AVGO", "BIDU", "BIIB", "BKNG", "CDNS", "CDW", "CERN", "CHKP", "CHTR", "CMCSA", "COST", "CPRT", "CSCO", "CSX", "CTAS", "CTSH", "DLTR", "DOCU", "DXCM", "EA", "EBAY", "EXC", "FAST", "FB", "FISV", "FOX", "FOXA", "GILD", "GOOG", "GOOGL", "IDXX", "ILMN", "INCY", "INTC", "INTU", "ISRG", "JD", "KDP", "KHC", "KLAC", "LRCX", "LULU", "MAR", "MCHP", "MDLZ", "MELI", "MNST", "MRNA", "MRVL", "MSFT", "MTCH", "MU", "MXIM", "NFLX", "NTES", "NVDA", "NXPI", "OKTA", "ORLY", "PAYX", "PCAR", "PDD", "PEP", "PTON", "PYPL", "QCOM", "REGN", "ROST", "SBUX", "SGEN", "SIRI", "SNPS", "SPLK", "SWKS", "TCOM", "TEAM", "TMUS", "TSLA", "TXN", "VRSK", "VRSN", "VRTX", "WBA", "WDAY", "XEL", "XLNX", "ZM", "AXP", "AMGN", "AAPL", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "KO", "JPM", "MCD", "MMM", "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "CRM", "VZ", "V", "WBA", "WMT", "DIS", "DOW", "AAPL", "ABBV", "ABT", "ACN", "ADBE", "AIG", "AMGN", "AMT", "AMZN", "AVGO", "AXP", "BA", "BAC", "BIIB", "BK", "BKNG", "BLK", "BMY", "BRK.B", "C", "CAT", "CHTR", "CL", "CMCSA", "COF", "COP", "COST", "CRM", "CSCO", "CVS", "CVX", "DD", "DHR", "DIS", "DOW", "DUK", "EMR", "EXC", "F", "FB", "FDX", "GD", "GE", "GILD", "GM", "GOOG", "GOOGL", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KHC", "KO", "LIN", "LLY", "LMT", "LOW", "MA", "MCD", "MDLZ", "MDT", "MET", "MMM", "MO", "MRK", "MS", "MSFT", "NEE", "NFLX", "NKE", "NVDA", "ORCL", "PEP", "PFE", "PG", "PM", "PYPL", "QCOM", "RTX", "SBUX", "SO", "SPG", "T", "TGT", "TMO", "TMUS", "TSLA", "TXN", "UNH", "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "WMT", "XOM"]
-      let request_stock = new XMLHttpRequest();
-      let stock_data = {}
-      let stock = stocks[prev_iteration]
-      var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[prev_iteration] +"&token=c17boqv48v6se55vrcdg"
-      request_stock.open("GET", url);
-      request_stock.send();
-      request_stock.onload = () => {
-        if (request_stock.status === 200) {
-          stock_data = JSON.parse(request_stock.response);
-          var price = stock_data["c"].toFixed(2);
-          var last_close = stock_data["pc"].toFixed(2);
-          var change = (price - last_close) / last_close * 100.0
-          previous_close.push([stock, last_close, change]);
+    // let previous_close = [];
+    // function get_close_price() {
+    //   var stocks = ["VOO", "DIA", "QQQ", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AEP", "ALGN", "ALXN", "AMAT", "AMD", "AMGN", "AMZN", "ANSS", "ASML", "ATVI", "AVGO", "BIDU", "BIIB", "BKNG", "CDNS", "CDW", "CERN", "CHKP", "CHTR", "CMCSA", "COST", "CPRT", "CSCO", "CSX", "CTAS", "CTSH", "DLTR", "DOCU", "DXCM", "EA", "EBAY", "EXC", "FAST", "FB", "FISV", "FOX", "FOXA", "GILD", "GOOG", "GOOGL", "IDXX", "ILMN", "INCY", "INTC", "INTU", "ISRG", "JD", "KDP", "KHC", "KLAC", "LRCX", "LULU", "MAR", "MCHP", "MDLZ", "MELI", "MNST", "MRNA", "MRVL", "MSFT", "MTCH", "MU", "MXIM", "NFLX", "NTES", "NVDA", "NXPI", "OKTA", "ORLY", "PAYX", "PCAR", "PDD", "PEP", "PTON", "PYPL", "QCOM", "REGN", "ROST", "SBUX", "SGEN", "SIRI", "SNPS", "SPLK", "SWKS", "TCOM", "TEAM", "TMUS", "TSLA", "TXN", "VRSK", "VRSN", "VRTX", "WBA", "WDAY", "XEL", "XLNX", "ZM", "AXP", "AMGN", "AAPL", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "KO", "JPM", "MCD", "MMM", "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "CRM", "VZ", "V", "WBA", "WMT", "DIS", "DOW", "AAPL", "ABBV", "ABT", "ACN", "ADBE", "AIG", "AMGN", "AMT", "AMZN", "AVGO", "AXP", "BA", "BAC", "BIIB", "BK", "BKNG", "BLK", "BMY", "BRK.B", "C", "CAT", "CHTR", "CL", "CMCSA", "COF", "COP", "COST", "CRM", "CSCO", "CVS", "CVX", "DD", "DHR", "DIS", "DOW", "DUK", "EMR", "EXC", "F", "FB", "FDX", "GD", "GE", "GILD", "GM", "GOOG", "GOOGL", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KHC", "KO", "LIN", "LLY", "LMT", "LOW", "MA", "MCD", "MDLZ", "MDT", "MET", "MMM", "MO", "MRK", "MS", "MSFT", "NEE", "NFLX", "NKE", "NVDA", "ORCL", "PEP", "PFE", "PG", "PM", "PYPL", "QCOM", "RTX", "SBUX", "SO", "SPG", "T", "TGT", "TMO", "TMUS", "TSLA", "TXN", "UNH", "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "WMT", "XOM"]
+    //   let request_stock = new XMLHttpRequest();
+    //   let stock_data = {}
+    //   let stock = stocks[prev_iteration]
+    //   var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[prev_iteration] +"&token=c17boqv48v6se55vrcdg"
+    //   request_stock.open("GET", url);
+    //   request_stock.send();
+    //   request_stock.onload = () => {
+    //     if (request_stock.status === 200) {
+    //       stock_data = JSON.parse(request_stock.response);
+    //       var price = stock_data["c"].toFixed(2);
+    //       var last_close = stock_data["pc"].toFixed(2);
+    //       var change = (price - last_close) / last_close * 100.0
+    //       previous_close.push([stock, last_close, change]);
           
-        } else {
-          console.log(`error ${request_stock.status} ${request_stock.statusText}`);
-        }
-      };
-
-      prev_iteration++;
-      if (prev_iteration != 237) {
-        setTimeout(get_close_price, 1500)
-      }
-      console.log(previous_close)
-    }
+    //     } else {
+    //       console.log(`error ${request_stock.status} ${request_stock.statusText}`);
+    //     }
+    //   };
+      
+    //   prev_iteration++;
+    //   if (prev_iteration != 237) {
+    //     setTimeout(get_close_price, 1500)
+    //   }
+    //   console.log(previous_close)
+    // }
+    
 
     function calculate_age() {
       // get constants from user input
@@ -120,7 +120,7 @@
       var day = document.getElementById("day").value;
       var year = document.getElementById("year").value;
       var now = new Date();
-
+      
       // error handling (if year is incorrect)
       if (year < 1000) {
         document.getElementById("error").innerHTML = "Please enter a valid date.";
@@ -133,30 +133,30 @@
         document.getElementById("error").innerHTML = "Please enter a valid date.";
         return false;
       }
-
+      
       if (birthday >= now) {
         document.getElementById("error").innerHTML = "Entered date must be before today.";
         return false;
       }
-
+      
       // calculate current age, and time til 82
       var ms_year = 31557807360
       var curr_age = (now.getTime() - birthday.getTime()) * 1.0 / ms_year
       var years_left = 78.54 - curr_age
       var curr_age_time = curr_age * 1000000000
       var years_left_time = years_left * ms_year
-
+      
       // calculate percentage
       var percentage = curr_age / 78.54 * 100.0
-
+      
       // calculate current time
       var then = new Date(
-          now.getFullYear(),
-          now.getMonth(),
-          now.getDate(),
-          0,0,0),
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        0,0,0),
       diff = now.getTime() - then.getTime();
-
+      
       // change HTML design after submitting age
       document.getElementById("age").innerHTML = age;
       var element = document.getElementById("age_counter");
@@ -167,12 +167,12 @@
       element.classList.remove("footer");
       var element = document.getElementById("birthdate");
       element.classList.add("birthdate");
-      
+    
       animateValue("age", curr_age_time, 78540000000, years_left_time);
-
+      
       return false;
     }
-
+      
     function animateValue(id, start, end, duration) {
       // assumes integer values for start and end
       
@@ -192,40 +192,40 @@
       var startTime = new Date().getTime();
       var endTime = startTime + duration;
       var timer;
-    
+      
       function run() {
-          var now = new Date().getTime();
-          var remaining = Math.max((endTime - now) / duration, 0);
-
-          // edit value
-          var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
-          obj.innerHTML = value.toFixed(9)
-
-          var today = new Date();
-          var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var today_seconds = today.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var time = today_hours + ":" + today_minutes + "<span class='seconds'>: " + today_seconds + " </span>";
-          obj_time.innerHTML = time;
-
-          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-          var today_month = months[today.getMonth()];
-          var today_date = today.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-          var today_year = today.getFullYear();
-          var today_day = days[today.getDay()];
-          var date = today_day + ", " + today_month + " " + today_date + ", " + today_year
-          obj_date.innerHTML = date;
-
-          if (value == end) {
-            clearInterval(timer);
-          }
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        
+        // edit value
+        var value = Math.round(end - (remaining * range)) * 1.0 / 1000000000;
+        obj.innerHTML = value.toFixed(9)
+        
+        var today = new Date();
+        var today_hours = today.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        var today_minutes = today.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        var today_seconds = today.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        var time = today_hours + ":" + today_minutes + "<span class='seconds'>: " + today_seconds + " </span>";
+        obj_time.innerHTML = time;
+        
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var today_month = months[today.getMonth()];
+        var today_date = today.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        var today_year = today.getFullYear();
+        var today_day = days[today.getDay()];
+        var date = today_day + ", " + today_month + " " + today_date + ", " + today_year
+        obj_date.innerHTML = date;
+        
+        if (value == end) {
+          clearInterval(timer);
+        }
       }
       
       timer = setInterval(run, stepTime);
       run();
     }
-
+    
     function weather() {
       var weather_one = document.getElementById("one");
       var weather_two = document.getElementById("two");
@@ -239,243 +239,254 @@
       var wind = document.getElementById("wind");
       let data = {}
       let request = new XMLHttpRequest();
-        request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=48105&days=3&aqi=no&alerts=no");
-        request.send();
-        request.onload = () => {
-  
-          // do all the weather updating here
-          var icons = []
-          var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-          var today = new Date();
-          var day = today.getDay();
-          if (request.status === 200) {
-            data = JSON.parse(request.response);
-            console.log(data);
-            data = data["forecast"]["forecastday"]
-            var weather_today = data[0]["hour"]
-            var sun_rise = data[0]["astro"]["sunrise"]
-            var sun_set = data[0]["astro"]["sunset"]
-            var weather_tom = data[1]["hour"]
-
-            var chance_of_rain = data[0]["day"]["daily_chance_of_rain"]
-            var wind_mph = data[0]["day"]["maxwind_mph"]
-
-            for (var x = 0; x < 3; ++x) {
-              var condition = data[x]["day"]["condition"]["text"].toLowerCase();
-              var code = data[x]["day"]["condition"]["code"];
-              var high_today = data[x]["day"]["maxtemp_f"]
-              var low_today = data[x]["day"]["mintemp_f"]
-              var icon = "";
-  
-              if (condition == "sunny") {
-                icon = '<i class="fas fa-sun"></i>'
+      request.open("GET", "https://api.weatherapi.com/v1/forecast.json?key=6dfedeba1486452f89152852211206&q=48105&days=3&aqi=no&alerts=no");
+      request.send();
+      request.onload = () => {
+        
+        // do all the weather updating here
+        var icons = []
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var today = new Date();
+        var day = today.getDay();
+        if (request.status === 200) {
+          data = JSON.parse(request.response);
+          console.log(data);
+          data = data["forecast"]["forecastday"]
+          var weather_today = data[0]["hour"]
+          var sun_rise = data[0]["astro"]["sunrise"]
+          var sun_set = data[0]["astro"]["sunset"]
+          var weather_tom = data[1]["hour"]
+          
+          var chance_of_rain = data[0]["day"]["daily_chance_of_rain"]
+          var wind_mph = data[0]["day"]["maxwind_mph"]
+          
+          for (var x = 0; x < 3; ++x) {
+            var condition = data[x]["day"]["condition"]["text"].toLowerCase();
+            var code = data[x]["day"]["condition"]["code"];
+            var high_today = data[x]["day"]["maxtemp_f"]
+            var low_today = data[x]["day"]["mintemp_f"]
+            var icon = "";
+            
+            if (condition == "sunny") {
+              icon = '<i class="fas fa-sun"></i>'
+            }
+            
+            else if (condition == "clear") {
+              icon = '<i class="fas fa-moon"></i>'
+            }
+            
+            else if (condition == "partly cloudy") {
+              icon = '<i class="fas fa-cloud-sun"></i>'
+            }
+            
+            else if (condition == "cloudy" || condition == "overcast") {
+              icon = '<i class="fas fa-cloud"></i>'
+            }
+            
+            else if (code == 1030 || code == 1135 || code == 1147) {
+              icon = '<i class="fas fa-smog"></i>'
+            }
+            
+            else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+              
+              icon = '<i class="fas fa-cloud-rain"></i>';
+              
+              if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
+                icon = '<i class="fas fa-cloud-showers-heavy"></i>'
               }
-  
-              else if (condition == "clear") {
-                icon = '<i class="fas fa-moon"></i>'
-              }
-  
-              else if (condition == "partly cloudy") {
-                icon = '<i class="fas fa-cloud-sun"></i>'
-              }
-  
-              else if (condition == "cloudy" || condition == "overcast") {
-                icon = '<i class="fas fa-cloud"></i>'
-              }
-  
-              else if (code == 1030 || code == 1135 || code == 1147) {
-                icon = '<i class="fas fa-smog"></i>'
-              }
-  
-              else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
-                
-                icon = '<i class="fas fa-cloud-rain"></i>';
-                
-                if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
-                  icon = '<i class="fas fa-cloud-showers-heavy"></i>'
-                }
-  
-                if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
-                  icon = '<i class="far fa-snowflake"></i>'
-                }
-  
-                if (condition.includes('thunder')) {
-                  icon = '<i class="fas fa-bolt"></i>'
-                }
-  
-              }
-  
-              else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              
+              if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
                 icon = '<i class="far fa-snowflake"></i>'
-  
-                if (condition.includes('thunder')) {
-                  icon = '<i class="fas fa-bolt"></i>'
-                }
               }
-  
-              else if (condition.includes("thundery")) {
-                icon = '<i class="fas fa-bolt"></i>';
+              
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
               }
-
-              icon += "<h1 class='temp'>"+ Math.round(high_today) +"</h1><h3 class='temp_low'>"+ Math.round(low_today) +"</h3>";
-              icon = "<h3 class='temp-date'>" + days[day++].substring(0, 3) + "</h3>" + icon
-              day = day % 7;
-              icons.push(icon);
+              
             }
-
-            weather_four.innerHTML = icons[0];
-            weather_five.innerHTML = icons[1];
-            weather_six.innerHTML = icons[2];
-            icons = [];
-
-            // calculate sunrise/sunset
-            sunrise.innerHTML = '<img class="sun" src="images/sunrise.png"/><p class="stats">' + sun_rise.substring(0, 5) + "</p>";
-            sunset.innerHTML = '<img class="sun" src="images/sunset.png"/><p class="stats">' + (parseInt(sun_set.substring(0, 2)) + 12).toString() + sun_set.substring(2, 5) + "</p>";
-            chance_rain.innerHTML = '<i class="rain-wind fas fa-tint"></i><p class="stats rain-wind">' + chance_of_rain + "%</p>"
-            wind.innerHTML = '<i class="rain-wind fas fa-wind"></i><p class="stats rain-wind">' + wind_mph.toFixed(0) + "<span class='mph'>mph</span></p>"
-  
-  
-            // calculating what hour to start at (next hour)
-            var now = Date.now() / 1000;
-            var start_weather = 24;
-            for (var x = 0; x < weather_today.length; ++x) {
-              if (now < weather_today[x]["time_epoch"]) {
-                start_weather = x;
-                break;
+            
+            else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              icon = '<i class="far fa-snowflake"></i>'
+              
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
               }
             }
-  
-            for (var x = 0; x < weather_tom.length; ++x) {
-              weather_today.push(weather_tom[x]);
+            
+            else if (condition.includes("thundery")) {
+              icon = '<i class="fas fa-bolt"></i>';
             }
-  
-            // finding weather for next 3 hours
-            weather_data = []
-            start_weather--;
-            weather_data.push(weather_today[start_weather++])
-            weather_data.push(weather_today[start_weather++])
-            weather_data.push(weather_today[start_weather++])
-  
-            console.log(weather_data);
-            for (var x = 0; x < weather_data.length; ++x) {
-              condition = weather_data[x]["condition"]["text"].toLowerCase();
-              code = weather_data[x]["condition"]["code"];
-              var day = weather_data[x]["is_day"];
-              var hour = weather_data[x]["time"].substring(11, 13)
-              var will_rain = weather_data[x]["will_it_rain"];
-              var cloud = weather_data[x]["cloud"]
-              icon = "";
-  
-              if (condition == "sunny") {
-                icon = '<i class="fas fa-sun"></i>'
-              }
-  
-              else if (condition == "clear") {
-                icon = '<i class="fas fa-moon"></i>'
-              }
-  
-              else if (will_rain == 0) {
 
-                // clear (no clouds)
-                if (cloud < 30) {
-                  if (day == 1) {
-                    icon = '<i class="fas fa-sun"></i>'
-                  }
-                  else {
-                    icon = '<i class="fas fa-moon"></i>'
-                  }
-                }
-  
-                // partly cloudy
-                else if (cloud >= 30 && cloud < 70) {
-                  if (day == 1) {
-                    icon = '<i class="fas fa-cloud-sun"></i>'
-                  }
-                  else {
-                    icon = '<i class="fas fa-cloud-moon"></i>'
-                  }
-                }
-  
-                else {
-                  icon = '<i class="fas fa-cloud"></i>'
-                }
-              }
-  
-              else if (condition == "partly cloudy") {
-                if (day == 0) {
-                  icon = '<i class="fas fa-cloud-moon"></i>'
+            icon += "<h1 class='temp'>"+ Math.round(high_today) +"</h1><h3 class='temp_low'>"+ Math.round(low_today) +"</h3>";
+            icon = "<h3 class='temp-date'>" + days[day++].substring(0, 3) + "</h3>" + icon
+            day = day % 7;
+            icons.push(icon);
+          }
+          
+          weather_four.innerHTML = icons[0];
+          weather_five.innerHTML = icons[1];
+          weather_six.innerHTML = icons[2];
+          icons = [];
+          
+          // calculate sunrise/sunset
+          sunrise.innerHTML = '<img class="sun" src="images/sunrise.png"/><p class="stats">' + sun_rise.substring(0, 5) + "</p>";
+          sunset.innerHTML = '<img class="sun" src="images/sunset.png"/><p class="stats">' + (parseInt(sun_set.substring(0, 2)) + 12).toString() + sun_set.substring(2, 5) + "</p>";
+          chance_rain.innerHTML = '<i class="rain-wind fas fa-tint"></i><p class="stats rain-wind">' + chance_of_rain + "%</p>"
+          wind.innerHTML = '<i class="rain-wind fas fa-wind"></i><p class="stats rain-wind">' + wind_mph.toFixed(0) + "<span class='mph'>mph</span></p>"
+          
+          
+          // calculating what hour to start at (next hour)
+          var now = Date.now() / 1000;
+          var start_weather = 24;
+          for (var x = 0; x < weather_today.length; ++x) {
+            if (now < weather_today[x]["time_epoch"]) {
+              start_weather = x;
+              break;
+            }
+          }
+          
+          for (var x = 0; x < weather_tom.length; ++x) {
+            weather_today.push(weather_tom[x]);
+          }
+          
+          // finding weather for next 3 hours
+          weather_data = []
+          start_weather--;
+          weather_data.push(weather_today[start_weather++])
+          weather_data.push(weather_today[start_weather++])
+          weather_data.push(weather_today[start_weather++])
+          
+          console.log(weather_data);
+          for (var x = 0; x < weather_data.length; ++x) {
+            condition = weather_data[x]["condition"]["text"].toLowerCase();
+            code = weather_data[x]["condition"]["code"];
+            var day = weather_data[x]["is_day"];
+            var hour = weather_data[x]["time"].substring(11, 13)
+            var will_rain = weather_data[x]["will_it_rain"];
+            var cloud = weather_data[x]["cloud"]
+            icon = "";
+            
+            if (condition == "sunny") {
+              icon = '<i class="fas fa-sun"></i>'
+            }
+            
+            else if (condition == "clear") {
+              icon = '<i class="fas fa-moon"></i>'
+            }
+            
+            else if (will_rain == 0) {
+              
+              // clear (no clouds)
+              if (cloud < 30) {
+                if (day == 1) {
+                  icon = '<i class="fas fa-sun"></i>'
                 }
                 else {
+                  icon = '<i class="fas fa-moon"></i>'
+                }
+              }
+              
+              // partly cloudy
+              else if (cloud >= 30 && cloud < 70) {
+                if (day == 1) {
                   icon = '<i class="fas fa-cloud-sun"></i>'
                 }
+                else {
+                  icon = '<i class="fas fa-cloud-moon"></i>'
+                }
               }
-  
-              else if (condition == "cloudy" || condition == "overcast") {
+              
+              else {
                 icon = '<i class="fas fa-cloud"></i>'
               }
-  
-              else if (code == 1030 || code == 1135 || code == 1147) {
-                icon = '<i class="fas fa-smog"></i>'
-              }
-  
-              else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
-                
-                icon = '<i class="fas fa-cloud-rain"></i>';
-                
-                if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
-                  icon = '<i class="fas fa-cloud-showers-heavy"></i>'
-                }
-  
-                if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
-                  icon = '<i class="far fa-snowflake"></i>'
-                }
-  
-                if (condition.includes('thunder')) {
-                  icon = '<i class="fas fa-bolt"></i>'
-                }
-  
-              }
-  
-              else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
-                icon = '<i class="far fa-snowflake"></i>'
-  
-                if (condition.includes('thunder')) {
-                  icon = '<i class="fas fa-bolt"></i>'
-                }
-              }
-  
-              else if (condition.includes("thundery")) {
-                icon = '<i class="fas fa-bolt"></i>';
-              }
-              icon += "<h1 class='temp'>"+ Math.round(weather_data[x]["temp_f"]) +"</h1>"
-              icon = "<h3>" + hour + "</h3>" + icon;
-              icons.push(icon);
             }
-  
-            // add icons to divs (based on weather)
-            weather_one.innerHTML = icons[0]
-            weather_two.innerHTML = icons[1]
-            weather_three.innerHTML = icons[2] 
-  
-          } else {
-            console.log(`error ${request.status} ${request.statusText}`);
+            
+            else if (condition == "partly cloudy") {
+              if (day == 0) {
+                icon = '<i class="fas fa-cloud-moon"></i>'
+              }
+              else {
+                icon = '<i class="fas fa-cloud-sun"></i>'
+              }
+            }
+            
+            else if (condition == "cloudy" || condition == "overcast") {
+              icon = '<i class="fas fa-cloud"></i>'
+            }
+            
+            else if (code == 1030 || code == 1135 || code == 1147) {
+              icon = '<i class="fas fa-smog"></i>'
+            }
+            
+            else if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+              
+              icon = '<i class="fas fa-cloud-rain"></i>';
+              
+              if (condition.includes("moderate") || condition.includes("heavy") || condition.includes("torrential")) {
+                icon = '<i class="fas fa-cloud-showers-heavy"></i>'
+              }
+              
+              if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+                icon = '<i class="far fa-snowflake"></i>'
+              }
+              
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+              
+            }
+            
+            else if (condition.includes("snow") || condition.includes("ice") || condition.includes("sleet") || condition.includes("blizzard")) {
+              icon = '<i class="far fa-snowflake"></i>'
+              
+              if (condition.includes('thunder')) {
+                icon = '<i class="fas fa-bolt"></i>'
+              }
+            }
+            
+            else if (condition.includes("thundery")) {
+              icon = '<i class="fas fa-bolt"></i>';
+            }
+            icon += "<h1 class='temp'>"+ Math.round(weather_data[x]["temp_f"]) +"</h1>"
+            icon = "<h3>" + hour + "</h3>" + icon;
+            icons.push(icon);
           }
-        };
-
-        setTimeout(weather, 60000)
+          
+          // add icons to divs (based on weather)
+          weather_one.innerHTML = icons[0]
+          weather_two.innerHTML = icons[1]
+          weather_three.innerHTML = icons[2] 
+          
+        } else {
+          console.log(`error ${request.status} ${request.statusText}`);
+        }
+      };
+      
+      setTimeout(weather, 60000)
     }
-
+    
     let iteration = 0;
+    let prev_iteration = 0;
+    let previous_close = [];
     function stonks() {
+      let stocks_pc = ["VOO", "DIA", "QQQ", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AEP", "ALGN", "ALXN", "AMAT", "AMD", "AMGN", "AMZN", "ANSS", "ASML", "ATVI", "AVGO", "BIDU", "BIIB", "BKNG", "CDNS", "CDW", "CERN", "CHKP", "CHTR", "CMCSA", "COST", "CPRT", "CSCO", "CSX", "CTAS", "CTSH", "DLTR", "DOCU", "DXCM", "EA", "EBAY", "EXC", "FAST", "FB", "FISV", "FOX", "FOXA", "GILD", "GOOG", "GOOGL", "IDXX", "ILMN", "INCY", "INTC", "INTU", "ISRG", "JD", "KDP", "KHC", "KLAC", "LRCX", "LULU", "MAR", "MCHP", "MDLZ", "MELI", "MNST", "MRNA", "MRVL", "MSFT", "MTCH", "MU", "MXIM", "NFLX", "NTES", "NVDA", "NXPI", "OKTA", "ORLY", "PAYX", "PCAR", "PDD", "PEP", "PTON", "PYPL", "QCOM", "REGN", "ROST", "SBUX", "SGEN", "SIRI", "SNPS", "SPLK", "SWKS", "TCOM", "TEAM", "TMUS", "TSLA", "TXN", "VRSK", "VRSN", "VRTX", "WBA", "WDAY", "XEL", "XLNX", "ZM", "AXP", "AMGN", "AAPL", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "KO", "JPM", "MCD", "MMM", "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "CRM", "VZ", "V", "WBA", "WMT", "DIS", "DOW", "AAPL", "ABBV", "ABT", "ACN", "ADBE", "AIG", "AMGN", "AMT", "AMZN", "AVGO", "AXP", "BA", "BAC", "BIIB", "BK", "BKNG", "BLK", "BMY", "BRK.B", "C", "CAT", "CHTR", "CL", "CMCSA", "COF", "COP", "COST", "CRM", "CSCO", "CVS", "CVX", "DD", "DHR", "DIS", "DOW", "DUK", "EMR", "EXC", "F", "FB", "FDX", "GD", "GE", "GILD", "GM", "GOOG", "GOOGL", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KHC", "KO", "LIN", "LLY", "LMT", "LOW", "MA", "MCD", "MDLZ", "MDT", "MET", "MMM", "MO", "MRK", "MS", "MSFT", "NEE", "NFLX", "NKE", "NVDA", "ORCL", "PEP", "PFE", "PG", "PM", "PYPL", "QCOM", "RTX", "SBUX", "SO", "SPG", "T", "TGT", "TMO", "TMUS", "TSLA", "TXN", "UNH", "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "WMT", "XOM"]
+      let request = new XMLHttpRequest();
+      var pc_stock = stocks_pc[prev_iteration]
+      var stock_pc_data = {}
+      var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks_pc[prev_iteration] +"&token=c17boqv48v6se55vrcdg"
+      request.open("GET", url);
+      request.send();
+      request.onload = () => {
+      if (request.status === 200) {
+        
+        // fetch first data
+        stock_pc_data = JSON.parse(request.response);
+        var price = stock_pc_data["c"].toFixed(2);
+        var last_close = stock_pc_data["pc"].toFixed(2);
+        var change = (price - last_close) / last_close * 100.0
+        previous_close.push([pc_stock, last_close, change]);
 
-      if (iteration == 0) {
-        console.log(iteration)
-        get_close_price();
-        setTimeout(stonks, 400000);
-        iteration += 1;
-      }
-
-      else {
+        // actually create the graph
         var now = new Date();
         var time_now = parseInt(now.getTime() / 1000) - 4*3600;
         if (now.getDay() == 0) {
@@ -489,8 +500,8 @@
         if (now.getDay() == 0 || now.getDay() == 6) {
           time_now = start_time + 3600*10 + 1800
         }
-
-        stocks = ["DO NOT REMOVE", "VOO", "DIA", "QQQ", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AEP", "ALGN", "VOO", "DIA", "QQQ", "ALXN", "AMAT", "AMD", "AMGN", "AMZN", "ANSS", "ASML", "VOO", "DIA", "QQQ", "ATVI", "AVGO", "BIDU", "BIIB", "BKNG", "CDNS", "CDW", "VOO", "DIA", "QQQ", "CERN", "CHKP", "CHTR", "CMCSA", "COST", "CPRT", "CSCO", "VOO", "DIA", "QQQ", "CSX", "CTAS", "CTSH", "DLTR", "DOCU", "DXCM", "EA", "VOO", "DIA", "QQQ", "EBAY", "EXC", "FAST", "FB", "FISV", "FOX", "FOXA", "VOO", "DIA", "QQQ", "GILD", "GOOG", "GOOGL", "IDXX", "ILMN", "INCY", "INTC", "VOO", "DIA", "QQQ", "INTU", "ISRG", "JD", "KDP", "KHC", "KLAC", "LRCX", "VOO", "DIA", "QQQ", "LULU", "MAR", "MCHP", "MDLZ", "MELI", "MNST", "MRNA", "VOO", "DIA", "QQQ", "MRVL", "MSFT", "MTCH", "MU", "MXIM", "NFLX", "NTES", "VOO", "DIA", "QQQ", "NVDA", "NXPI", "OKTA", "ORLY", "PAYX", "PCAR", "PDD", "VOO", "DIA", "QQQ", "PEP", "PTON", "PYPL", "QCOM", "REGN", "ROST", "SBUX", "VOO", "DIA", "QQQ", "SGEN", "SIRI", "SNPS", "SPLK", "SWKS", "TCOM", "TEAM", "VOO", "DIA", "QQQ", "TMUS", "TSLA", "TXN", "VRSK", "VRSN", "VRTX", "WBA", "VOO", "DIA", "QQQ", "WDAY", "XEL", "XLNX", "ZM", "AXP", "AMGN", "AAPL", "VOO", "DIA", "QQQ", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "VOO", "DIA", "QQQ", "IBM", "INTC", "JNJ", "KO", "JPM", "MCD", "MMM", "VOO", "DIA", "QQQ", "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "CRM", "VOO", "DIA", "QQQ", "VZ", "V", "WBA", "WMT", "DIS", "DOW", "AAPL", "VOO", "DIA", "QQQ", "ABBV", "ABT", "ACN", "ADBE", "AIG", "AMGN", "AMT", "VOO", "DIA", "QQQ", "AMZN", "AVGO", "AXP", "BA", "BAC", "BIIB", "BK", "VOO", "DIA", "QQQ", "BKNG", "BLK", "BMY", "BRK.B", "C", "CAT", "CHTR", "VOO", "DIA", "QQQ", "CL", "CMCSA", "COF", "COP", "COST", "CRM", "CSCO", "VOO", "DIA", "QQQ", "CVS", "CVX", "DD", "DHR", "DIS", "DOW", "DUK", "VOO", "DIA", "QQQ", "EMR", "EXC", "F", "FB", "FDX", "GD", "GE", "VOO", "DIA", "QQQ", "GILD", "GM", "GOOG", "GOOGL", "GS", "HD", "HON", "VOO", "DIA", "QQQ", "IBM", "INTC", "JNJ", "JPM", "KHC", "KO", "LIN", "VOO", "DIA", "QQQ", "LLY", "LMT", "LOW", "MA", "MCD", "MDLZ", "MDT", "VOO", "DIA", "QQQ", "MET", "MMM", "MO", "MRK", "MS", "MSFT", "NEE", "VOO", "DIA", "QQQ", "NFLX", "NKE", "NVDA", "ORCL", "PEP", "PFE", "PG", "VOO", "DIA", "QQQ", "PM", "PYPL", "QCOM", "RTX", "SBUX", "SO", "SPG", "VOO", "DIA", "QQQ", "T", "TGT", "TMO", "TMUS", "TSLA", "TXN", "UNH", "VOO", "DIA", "QQQ", "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "VOO", "DIA", "QQQ", "WMT", "XOM"]
+  
+        stocks = ["VOO", "DIA", "QQQ", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AEP", "ALGN", "VOO", "DIA", "QQQ", "ALXN", "AMAT", "AMD", "AMGN", "AMZN", "ANSS", "ASML", "VOO", "DIA", "QQQ", "ATVI", "AVGO", "BIDU", "BIIB", "BKNG", "CDNS", "CDW", "VOO", "DIA", "QQQ", "CERN", "CHKP", "CHTR", "CMCSA", "COST", "CPRT", "CSCO", "VOO", "DIA", "QQQ", "CSX", "CTAS", "CTSH", "DLTR", "DOCU", "DXCM", "EA", "VOO", "DIA", "QQQ", "EBAY", "EXC", "FAST", "FB", "FISV", "FOX", "FOXA", "VOO", "DIA", "QQQ", "GILD", "GOOG", "GOOGL", "IDXX", "ILMN", "INCY", "INTC", "VOO", "DIA", "QQQ", "INTU", "ISRG", "JD", "KDP", "KHC", "KLAC", "LRCX", "VOO", "DIA", "QQQ", "LULU", "MAR", "MCHP", "MDLZ", "MELI", "MNST", "MRNA", "VOO", "DIA", "QQQ", "MRVL", "MSFT", "MTCH", "MU", "MXIM", "NFLX", "NTES", "VOO", "DIA", "QQQ", "NVDA", "NXPI", "OKTA", "ORLY", "PAYX", "PCAR", "PDD", "VOO", "DIA", "QQQ", "PEP", "PTON", "PYPL", "QCOM", "REGN", "ROST", "SBUX", "VOO", "DIA", "QQQ", "SGEN", "SIRI", "SNPS", "SPLK", "SWKS", "TCOM", "TEAM", "VOO", "DIA", "QQQ", "TMUS", "TSLA", "TXN", "VRSK", "VRSN", "VRTX", "WBA", "VOO", "DIA", "QQQ", "WDAY", "XEL", "XLNX", "ZM", "AXP", "AMGN", "AAPL", "VOO", "DIA", "QQQ", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "VOO", "DIA", "QQQ", "IBM", "INTC", "JNJ", "KO", "JPM", "MCD", "MMM", "VOO", "DIA", "QQQ", "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "CRM", "VOO", "DIA", "QQQ", "VZ", "V", "WBA", "WMT", "DIS", "DOW", "AAPL", "VOO", "DIA", "QQQ", "ABBV", "ABT", "ACN", "ADBE", "AIG", "AMGN", "AMT", "VOO", "DIA", "QQQ", "AMZN", "AVGO", "AXP", "BA", "BAC", "BIIB", "BK", "VOO", "DIA", "QQQ", "BKNG", "BLK", "BMY", "BRK.B", "C", "CAT", "CHTR", "VOO", "DIA", "QQQ", "CL", "CMCSA", "COF", "COP", "COST", "CRM", "CSCO", "VOO", "DIA", "QQQ", "CVS", "CVX", "DD", "DHR", "DIS", "DOW", "DUK", "VOO", "DIA", "QQQ", "EMR", "EXC", "F", "FB", "FDX", "GD", "GE", "VOO", "DIA", "QQQ", "GILD", "GM", "GOOG", "GOOGL", "GS", "HD", "HON", "VOO", "DIA", "QQQ", "IBM", "INTC", "JNJ", "JPM", "KHC", "KO", "LIN", "VOO", "DIA", "QQQ", "LLY", "LMT", "LOW", "MA", "MCD", "MDLZ", "MDT", "VOO", "DIA", "QQQ", "MET", "MMM", "MO", "MRK", "MS", "MSFT", "NEE", "VOO", "DIA", "QQQ", "NFLX", "NKE", "NVDA", "ORCL", "PEP", "PFE", "PG", "VOO", "DIA", "QQQ", "PM", "PYPL", "QCOM", "RTX", "SBUX", "SO", "SPG", "VOO", "DIA", "QQQ", "T", "TGT", "TMO", "TMUS", "TSLA", "TXN", "UNH", "VOO", "DIA", "QQQ", "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "VOO", "DIA", "QQQ", "WMT", "XOM"]
         let request_stock = new XMLHttpRequest();
         let stock_data = {}
         var stock = stocks[iteration]
@@ -505,13 +516,20 @@
             var price = stock_data["c"][stock_data["c"].length - 1].toFixed(2);
             var prices_stock = stock_data["c"]
             var last_close = 0;
-
+  
             for (var x = 0; x < previous_close.length; ++x) {
               if (previous_close[x][0] == stock) {
                 last_close = parseFloat(previous_close[x][1]);
               }
+              if (x == previous_close.length - 1 && last_close == 0) {
+                iteration++;
+                iteration = iteration % 336;
+                prev_iteration++;
+                prev_iteration = prev_iteration % 237
+                setTimeout(stonks, 5500);
+              }
             }
-
+  
             var change = (price - last_close) / last_close * 100.0
             var stock_info = "<p class='stock_name'>" + stock + "</p><span class='price'>" + price;
             
@@ -523,7 +541,7 @@
               stock_info += '<div id="info"><i class="up fas fa-long-arrow-alt-up"></i>'
               stock_info += "<span class='up'>" + change.toFixed(2) + "%</span></div>";         
             }
-
+  
             stock_info += "</span>";
             
             var stock_pc = 0;
@@ -533,12 +551,19 @@
                 stock_pc = parseFloat(previous_close[x][1]);
                 stock_change = previous_close[x][2]
               }
+              if (x == previous_close.length - 1 && stock_pc == 0) {
+                iteration++;
+                iteration = iteration % 336;
+                prev_iteration++;
+                prev_iteration = prev_iteration % 237
+                setTimeout(stonks, 5500);
+              }
             }
-
+  
             stock = "STOCK";
             document.getElementById(stock).innerHTML = stock_info;
-
-
+  
+  
             stock_data = JSON.parse(request_stock.response);
             var stock_prices = []
             for (var x = 0; x < stock_data['c'].length; ++x) {
@@ -547,7 +572,7 @@
               stock_prices.push([hours, stock_data['c'][x], parseFloat(stock_pc)])
             }
             stock_prices.push([20, stock_data['c'][stock_data['c'].length - 1], parseFloat(stock_pc)])
-
+  
             google.charts.load('current', {packages: ['corechart', 'line']});
             google.charts.setOnLoadCallback(drawBasic);
         
@@ -559,7 +584,7 @@
               data.addColumn('number', 'Previous Close');
         
               data.addRows(stock_prices);
-
+  
               var ticks = [];
               var high = 0;
               var low = 1000000;
@@ -568,39 +593,44 @@
                 if (prices_stock[x] > high) {high = prices_stock[x]}
               }
               console.log(low, high, change)
-
+  
               if (change < 0) {
-                high = Math.ceil(stock_pc) + 1
+                if (high < Math.ceil(stock_pc) + 1) {
+                  high = Math.ceil(stock_pc) + 1
+                }
                 low = Math.floor(low) - 1
               }
               else {
-                low = Math.floor(stock_pc) - 1
+                if (low > Math.floor(stock_pc) - 1) {
+                  low = Math.floor(stock_pc) - 1
+                }
                 high = Math.ceil(high) + 1
               }
               console.log(low, high)
-
+  
               var increment = 0.5;
               while (true) {
                 var low_temp = low;
-
+  
                 while (low < high) {
                   ticks.push(low.toFixed(2));
                   low += increment;
                 } 
-
-                if (ticks.length == 4) {
+  
+                if (ticks.length <= 4) {
                   break;
                 }
-
+  
                 else {
                   low = low_temp;
                   ticks = [];
                 }
-
+  
                 increment += 0.5;
               }
               ticks.push(low)
-
+              console.log(ticks)
+  
               var options = {
                 'width': 460, 
                 'height': 275, 
@@ -637,14 +667,14 @@
                 },
                 'chartArea': {'width': '75%', 'height': '75%'},
               };
-
+  
               if (stock_change < 0) {
                 options["colors"] = ['#de7171', '#c7c7c7'];
               }
         
               var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
               chart.draw(data, options);
-
+  
               // change to :00
               var axis = document.getElementsByTagName("text")
               console.log(axis)
@@ -655,18 +685,25 @@
               axis[4].innerHTML = "18:00"
               axis[5].innerHTML = "20:00"
             }
-
+  
           } else {
             console.log(`error ${request_stock.status} ${request_stock.statusText}`);
           }
         };
-        
+
         iteration++;
         iteration = iteration % 336;
+        prev_iteration++;
+        prev_iteration = prev_iteration % 237
         setTimeout(stonks, 5500);
       }
+
+       else {
+        console.log(`error ${request_stock.status} ${request_stock.statusText}`);
+      }
+    };
+      
     }
-    
     
     weather();
     stonks();
