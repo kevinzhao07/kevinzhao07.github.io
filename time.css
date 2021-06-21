@@ -111,7 +111,7 @@ div#age_counter {
   margin: 0 auto;
   position: absolute;
   top: 20px;
-  right: 80px;
+  right: 70px;
 }
 
 p#age, p#age-max, p#time-now, p#percent_of_day {
@@ -127,7 +127,7 @@ p#age {
 }
 
 p#time-now{
-  font-size: 25vw;
+  font-size: 22.5vw;
   line-height: .28em;
   margin-top: 60px;
 }
