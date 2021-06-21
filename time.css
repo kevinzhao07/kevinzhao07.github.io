@@ -127,9 +127,9 @@ p#age {
 }
 
 p#time-now{
-  font-size: 21vw;
+  font-size: 22vw;
   line-height: .28em;
-  margin-top: 60px;
+  margin-top: 80px;
 }
 
 p#date-now{
