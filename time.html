@@ -82,37 +82,7 @@
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-  <script>
-
-    // let previous_close = [];
-    // function get_close_price() {
-    //   var stocks = ["VOO", "DIA", "QQQ", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AEP", "ALGN", "ALXN", "AMAT", "AMD", "AMGN", "AMZN", "ANSS", "ASML", "ATVI", "AVGO", "BIDU", "BIIB", "BKNG", "CDNS", "CDW", "CERN", "CHKP", "CHTR", "CMCSA", "COST", "CPRT", "CSCO", "CSX", "CTAS", "CTSH", "DLTR", "DOCU", "DXCM", "EA", "EBAY", "EXC", "FAST", "FB", "FISV", "FOX", "FOXA", "GILD", "GOOG", "GOOGL", "IDXX", "ILMN", "INCY", "INTC", "INTU", "ISRG", "JD", "KDP", "KHC", "KLAC", "LRCX", "LULU", "MAR", "MCHP", "MDLZ", "MELI", "MNST", "MRNA", "MRVL", "MSFT", "MTCH", "MU", "MXIM", "NFLX", "NTES", "NVDA", "NXPI", "OKTA", "ORLY", "PAYX", "PCAR", "PDD", "PEP", "PTON", "PYPL", "QCOM", "REGN", "ROST", "SBUX", "SGEN", "SIRI", "SNPS", "SPLK", "SWKS", "TCOM", "TEAM", "TMUS", "TSLA", "TXN", "VRSK", "VRSN", "VRTX", "WBA", "WDAY", "XEL", "XLNX", "ZM", "AXP", "AMGN", "AAPL", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "KO", "JPM", "MCD", "MMM", "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "CRM", "VZ", "V", "WBA", "WMT", "DIS", "DOW", "AAPL", "ABBV", "ABT", "ACN", "ADBE", "AIG", "AMGN", "AMT", "AMZN", "AVGO", "AXP", "BA", "BAC", "BIIB", "BK", "BKNG", "BLK", "BMY", "BRK.B", "C", "CAT", "CHTR", "CL", "CMCSA", "COF", "COP", "COST", "CRM", "CSCO", "CVS", "CVX", "DD", "DHR", "DIS", "DOW", "DUK", "EMR", "EXC", "F", "FB", "FDX", "GD", "GE", "GILD", "GM", "GOOG", "GOOGL", "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KHC", "KO", "LIN", "LLY", "LMT", "LOW", "MA", "MCD", "MDLZ", "MDT", "MET", "MMM", "MO", "MRK", "MS", "MSFT", "NEE", "NFLX", "NKE", "NVDA", "ORCL", "PEP", "PFE", "PG", "PM", "PYPL", "QCOM", "RTX", "SBUX", "SO", "SPG", "T", "TGT", "TMO", "TMUS", "TSLA", "TXN", "UNH", "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "WMT", "XOM"]
-    //   let request_stock = new XMLHttpRequest();
-    //   let stock_data = {}
-    //   let stock = stocks[prev_iteration]
-    //   var url = "https://finnhub.io/api/v1/quote?symbol="+ stocks[prev_iteration] +"&token=c17boqv48v6se55vrcdg"
-    //   request_stock.open("GET", url);
-    //   request_stock.send();
-    //   request_stock.onload = () => {
-    //     if (request_stock.status === 200) {
-    //       stock_data = JSON.parse(request_stock.response);
-    //       var price = stock_data["c"].toFixed(2);
-    //       var last_close = stock_data["pc"].toFixed(2);
-    //       var change = (price - last_close) / last_close * 100.0
-    //       previous_close.push([stock, last_close, change]);
-          
-    //     } else {
-    //       console.log(`error ${request_stock.status} ${request_stock.statusText}`);
-    //     }
-    //   };
-      
-    //   prev_iteration++;
-    //   if (prev_iteration != 237) {
-    //     setTimeout(get_close_price, 1500)
-    //   }
-    //   console.log(previous_close)
-    // }
-    
+  <script>    
 
     function calculate_age() {
       // get constants from user input
@@ -697,6 +667,10 @@
             console.log(`error ${request_stock.status} ${request_stock.statusText}`);
           }
         };
+
+        if (iteration == 335) {
+          previous_close = [];
+        }
 
         iteration++;
         iteration = iteration % 336;

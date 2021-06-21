@@ -357,7 +357,7 @@ p.rain-wind {
 div#chart_div {
   position: relative;
   margin-top: -20px;
-  margin-left: -20px;
+  margin-left: -10px;
   z-index: -1;
 }
 
