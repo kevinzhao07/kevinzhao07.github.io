@@ -121,13 +121,13 @@ p#age, p#age-max, p#time-now, p#percent_of_day {
 }
 
 p#age {
-  font-size: 3.5vw;
+  font-size: 3vw;
   font-weight: bold;
   line-height: .8em;
 }
 
 p#time-now{
-  font-size: 22.5vw;
+  font-size: 21vw;
   line-height: .28em;
   margin-top: 60px;
 }
