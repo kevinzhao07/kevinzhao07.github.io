@@ -130,7 +130,7 @@ p#age {
 p#time-now{
   font-size: 26vw;
   line-height: .68em;
-  margin-top: 30px;
+  margin-top: 75px;
 }
 
 p#date-now{
@@ -225,7 +225,7 @@ div#weather-forecast {
 }
 
 div#misc {
-  width: 48%;
+  width: 53%;
   text-align: center;
   color: #f6fafb;
   float: left;
@@ -495,7 +495,7 @@ p.miles {
 div.route-stats {
   font-weight: 700;
   margin-top: 2px;
-  width: 110px;
+  width: 140px;
   margin-right: 0;
   float: left;
 }
