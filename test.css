@@ -420,7 +420,7 @@ i.exit {
 
 span.exit_15 {
   position: absolute;
-  top: 0;
+  top: 5px;
   left: 1px;
   z-index: 101;
   font-size: 25px;
@@ -429,8 +429,8 @@ span.exit_15 {
 
 span.exit_14 {
   position: absolute;
-  top: 0;
-  left: 3px;
+  top: 5px;
+  left: 1px;
   z-index: 101;
   font-size: 25px;
   font-weight: bold;
@@ -438,8 +438,8 @@ span.exit_14 {
 
 span.exit_12 {
   position: absolute;
-  top: 0;
-  left: 3px;
+  top: 5px;
+  left: 1px;
   z-index: 101;
   font-size: 25px;
   font-weight: bold;
@@ -447,7 +447,7 @@ span.exit_12 {
 
 span.exit_A {
   position: absolute;
-  bottom: -5px;
+  bottom: -15px;
   right: 8px;
   z-index: 101;
   font-size: 25px;
