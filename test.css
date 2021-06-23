@@ -4,6 +4,7 @@
 * {
   font-family: Sans;
   /* border: 1px solid red; */
+  font-weight: 700;
 }
 
 body.bg {
@@ -127,17 +128,18 @@ p#age {
 }
 
 p#time-now{
-  font-size: 20vw;
+  font-size: 26vw;
   line-height: .68em;
   margin-top: 30px;
 }
 
 p#date-now{
-  font-size: 4.5vw;
+  font-size: 5.5vw;
   color: #d49c6b;
   margin: 0;
+  margin-bottom: 20px;
   line-height: 1.1em;
-  margin-top: 10px;
+  margin-top: 15px;
   font-weight: bold;
 }
 
@@ -209,7 +211,7 @@ div#weather, div#weather-forecast {
   text-align: center;
   color: #f6fafb;
   float: left;
-  margin-left: 3%;
+  margin-left: 17px;
 }
 
 div#weather {
@@ -223,11 +225,11 @@ div#weather-forecast {
 }
 
 div#misc {
-  width: 46%;
+  width: 50%;
   text-align: center;
   color: #f6fafb;
   float: left;
-  margin-left: 55px;
+  margin-left: 40px;
   margin-top: 10px;
 }
 
@@ -271,7 +273,7 @@ div#two, div#three, div#five, div#six {
 }
 
 i {
-  font-size: 70px;
+  font-size: 80px;
   color: #e6e6e6;
 }
 
@@ -319,12 +321,12 @@ h3.temp_low {
 }
 
 img.sun {
-  width: 70px;
+  width: 90px;
 }
 
 div#sunrise, div#sunset, div#chance_rain, div#wind {
   float: left;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 div#sunrise {
@@ -336,17 +338,18 @@ div#wind {
 }
 
 i.rain-wind {
-  font-size: 61px;
+  font-size: 80px;
 }
 
 p.stats {
   margin: 0;
-  font-size: 37px;
+  font-size: 40px;
   font-weight: 700;
 }
 
 span.mph {
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 p.rain-wind {
@@ -370,8 +373,8 @@ p.rain-wind {
 #exit-15 {
   position: absolute;
   z-index: 100;
-  top: 200px;
-  left: 585px;
+  top: 180px;
+  left: 565px;
   color: #f6fafb;
   background-color: #ededed;
   height: 55px;
@@ -380,8 +383,8 @@ p.rain-wind {
 #exit-14 {
   position: absolute;
   z-index: 100;
-  top: 395px;
-  left: 445px;
+  top: 365px;
+  left: 415px;
   color: #f6fafb;
   background-color: #ededed;
   height: 55px;
@@ -390,8 +393,8 @@ p.rain-wind {
 #exit-12 {
   position: absolute;
   z-index: 100;
-  top: 635px;
-  left: 395px;
+  top: 620px;
+  left: 375px;
   color: #f6fafb;
   background-color: #ededed;
   height: 60px;
@@ -418,7 +421,7 @@ i.exit {
 span.exit_15 {
   position: absolute;
   top: 0;
-  left: 3px;
+  left: 1px;
   z-index: 101;
   font-size: 25px;
   font-weight: bold;
@@ -465,22 +468,45 @@ button.activate-map {
   border: 0;
   outline: 0;
   margin: 0;
-  padding: 10px;
+  padding: 15px;
   border-radius: 5px;
-  width: 210px;
+  width: 330px;
   padding-left: 20px;
   font-size: 27px;
   font-weight: bold;
   color: #252b31;
-  margin-top: 20px;
+  margin-top: 25px;
+  float: left;
+  margin-left: 45px;
 }
 
 i.route {
   color: #252b31;
   float: left;
+  font-size: 80px;
+  margin-right: 20px;
 }
 
 p.miles {
   line-height: 0em;
   margin: 0 !important;
+}
+
+div.route-stats {
+  font-weight: 700;
+  margin-top: 6px;
+  width: 100px;
+  margin-right: 0;
+  float: left;
+}
+
+div.eta {
+  float: left;
+  margin-top: 6px;
+  width: 80px;
+  margin-left: 10px;
+} 
+
+p.eta-time {
+  margin: 0px;
 }

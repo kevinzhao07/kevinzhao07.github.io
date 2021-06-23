@@ -58,6 +58,7 @@
     let map, infowindow, infoWindow_14, infoWindow_15, infoWindow_12;
 
     function initMap() {
+      
       map = new google.maps.Map(document.getElementById("map"), {
         zoom: 14,
         center: { lat: 40.767477, lng: -73.831601 },
@@ -88,13 +89,35 @@
         }, callback);
   
       function callback(response, status) {
-        console.log(response)
+        var today = new Date();
+        var today_hours = today.getHours()
+        var today_minutes = today.getMinutes()
         var button = document.getElementById('activate_map')
-        var button_html = '<i class="route fas fa-route"></i>'
+        var time = parseInt(response["rows"][0]["elements"][0]["duration"]["text"].substring(0, 2))
+        var button_html = '<i class="route fas fa-route"></i><div class="route-stats">'
         button_html += response["rows"][0]["elements"][0]["distance"]["text"]
         button_html += "<br/>"
-        button_html += response["rows"][0]["elements"][0]["duration"]["text"]
+        button_html += response["rows"][0]["elements"][0]["duration"]["text"] + "</div>"
+        button_html += "<div class='eta'>ETA<br/>";
+        var arrival = "";
+        if (today_minutes + time > 60) {
+          arrival += (today_hours + 1).toString() + ":" + ((today_minutes + time) % 60);
+        }
+        else {
+          arrival += today_hours.toString() + ":" + (today_minutes + time);
+        }
+        button_html += arrival
         button.innerHTML = button_html;
+
+      }
+
+      var today = new Date();
+      var today_hours = today.getHours()
+      if (today_hours > 11 && today_hours < 13) {
+        setTimeout(initMap, 300000)
+      }
+      else {
+        setTimeout(initMap, 30*60*1000)
       }
     }
 
@@ -160,6 +183,8 @@
       var today_day = days[today.getDay()];
       var date = today_day + ", " + today_month + " " + today_date + ", " + today_year
       obj_date.innerHTML = date;
+
+      setTimeout(run, 500)
     }
     run();
 
