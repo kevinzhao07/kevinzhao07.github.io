@@ -110,7 +110,7 @@ div#age_counter {
   height: 100px; 
   margin: 0 auto;
   position: absolute;
-  top: 20px;
+  top: 35px;
   right: 70px;
 }
 
@@ -219,7 +219,6 @@ div#weather {
 div#weather-forecast {
   margin-top: -10px;
   margin-left: 0%;
-  border-left: 2px solid #adadad;
 }
 
 div#misc {
@@ -238,6 +237,7 @@ div#stocks {
   font-size: 4.5vw;
   margin-right: 3vw;
   padding-left: 3.5%;
+  margin-top: 10px;
 }
 
 div#STOCK, div#EXTRA {
