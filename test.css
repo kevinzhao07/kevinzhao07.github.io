@@ -472,7 +472,7 @@ button.activate-map {
   border-radius: 5px;
   width: 330px;
   padding-left: 20px;
-  font-size: 27px;
+  font-size: 30px;
   font-weight: bold;
   color: #252b31;
   margin-top: 25px;
@@ -494,7 +494,7 @@ p.miles {
 
 div.route-stats {
   font-weight: 700;
-  margin-top: 6px;
+  margin-top: 2px;
   width: 100px;
   margin-right: 0;
   float: left;
@@ -502,7 +502,7 @@ div.route-stats {
 
 div.eta {
   float: left;
-  margin-top: 6px;
+  margin-top: 2px;
   width: 80px;
   margin-left: 10px;
 } 
