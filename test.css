@@ -374,7 +374,7 @@ p.rain-wind {
   position: absolute;
   z-index: 100;
   top: 180px;
-  left: 565px;
+  left: 560px;
   color: #f6fafb;
   background-color: #ededed;
   height: 55px;
@@ -384,7 +384,7 @@ p.rain-wind {
   position: absolute;
   z-index: 100;
   top: 365px;
-  left: 415px;
+  left: 425px;
   color: #f6fafb;
   background-color: #ededed;
   height: 55px;
@@ -393,8 +393,8 @@ p.rain-wind {
 #exit-12 {
   position: absolute;
   z-index: 100;
-  top: 620px;
-  left: 375px;
+  top: 615px;
+  left: 360px;
   color: #f6fafb;
   background-color: #ededed;
   height: 60px;
@@ -403,8 +403,8 @@ p.rain-wind {
 #home {
   position: absolute;
   z-index: 100;
-  top: 635px;
-  left: 605px;
+  top: 625px;
+  left: 600px;
 }
 
 #exit_map {
