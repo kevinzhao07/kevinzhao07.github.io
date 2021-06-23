@@ -98,18 +98,18 @@
         button_html += response["rows"][0]["elements"][0]["distance"]["text"]
         button_html += "<br/>"
         button_html += response["rows"][0]["elements"][0]["duration"]["text"] + "</div>"
-        button_html += "<div class='eta'>ETA<br/>";
-        var arrival = "";
-        if (today_minutes + time > 60) {
-          if (today_hours == 23) {
-            today_hours = -1;
-          }
-          arrival += (today_hours + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString() + ":" + ((today_minutes + time) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
-        }
-        else {
-          arrival += today_hours.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString() + ":" + (today_minutes + time).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
-        }
-        button_html += arrival
+        // button_html += "<div class='eta'>ETA<br/>";
+        // var arrival = "";
+        // if (today_minutes + time > 60) {
+        //   if (today_hours == 23) {
+        //     today_hours = -1;
+        //   }
+        //   arrival += (today_hours + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString() + ":" + ((today_minutes + time) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+        // }
+        // else {
+        //   arrival += today_hours.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString() + ":" + (today_minutes + time).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+        // }
+        // button_html += arrival
         button.innerHTML = button_html;
 
       }
