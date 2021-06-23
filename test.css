@@ -229,7 +229,7 @@ div#misc {
   text-align: center;
   color: #f6fafb;
   float: left;
-  margin-left: 40px;
+  margin-left: 10px;
   margin-top: 10px;
 }
 
@@ -321,7 +321,7 @@ h3.temp_low {
 }
 
 img.sun {
-  width: 90px;
+  width: 83px;
 }
 
 div#sunrise, div#sunset, div#chance_rain, div#wind {
@@ -338,7 +338,7 @@ div#wind {
 }
 
 i.rain-wind {
-  font-size: 80px;
+  font-size: 74px;
 }
 
 p.stats {
@@ -470,14 +470,14 @@ button.activate-map {
   margin: 0;
   padding: 15px;
   border-radius: 5px;
-  width: 330px;
+  width: 360px;
   padding-left: 20px;
   font-size: 30px;
   font-weight: bold;
   color: #252b31;
-  margin-top: 25px;
+  margin-top: 15px;
   float: left;
-  margin-left: 45px;
+  margin-left: 37px;
 }
 
 i.route {
@@ -495,7 +495,7 @@ p.miles {
 div.route-stats {
   font-weight: 700;
   margin-top: 2px;
-  width: 100px;
+  width: 110px;
   margin-right: 0;
   float: left;
 }
@@ -504,7 +504,7 @@ div.eta {
   float: left;
   margin-top: 2px;
   width: 80px;
-  margin-left: 10px;
+  margin-left: 20px;
 } 
 
 p.eta-time {

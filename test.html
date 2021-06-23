@@ -101,10 +101,13 @@
         button_html += "<div class='eta'>ETA<br/>";
         var arrival = "";
         if (today_minutes + time > 60) {
-          arrival += (today_hours + 1).toString() + ":" + ((today_minutes + time) % 60);
+          if (today_hours == 23) {
+            today_hours = -1;
+          }
+          arrival += (today_hours + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString() + ":" + ((today_minutes + time) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         }
         else {
-          arrival += today_hours.toString() + ":" + (today_minutes + time);
+          arrival += today_hours.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString() + ":" + (today_minutes + time).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         }
         button_html += arrival
         button.innerHTML = button_html;
