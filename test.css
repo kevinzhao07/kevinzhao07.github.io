@@ -1,4 +1,4 @@
-@font-face { font-family: Sans; src: url('Source_Sans_Pro/SourceSansPro-Regular.ttf'); } 
+@font-face { font-family: Sans; src: url('Roboto/Roboto-Regular.ttf'); } 
 
 /* ALL */
 * {
@@ -225,12 +225,12 @@ div#weather-forecast {
 }
 
 div#misc {
-  width: 50%;
+  width: 48%;
   text-align: center;
   color: #f6fafb;
   float: left;
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 div#stocks {
@@ -321,7 +321,7 @@ h3.temp_low {
 }
 
 img.sun {
-  width: 83px;
+  width: 72px;
 }
 
 div#sunrise, div#sunset, div#chance_rain, div#wind {
@@ -338,12 +338,12 @@ div#wind {
 }
 
 i.rain-wind {
-  font-size: 74px;
+  font-size: 65px;
 }
 
 p.stats {
   margin: 0;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
 }
 
@@ -469,15 +469,15 @@ button.activate-map {
   outline: 0;
   margin: 0;
   padding: 15px;
-  border-radius: 5px;
-  width: 360px;
+  border-radius: 10px;
+  width: 400px;
   padding-left: 20px;
   font-size: 30px;
   font-weight: bold;
   color: #252b31;
   margin-top: 15px;
   float: left;
-  margin-left: 37px;
+  margin-left: 10px;
 }
 
 i.route {
